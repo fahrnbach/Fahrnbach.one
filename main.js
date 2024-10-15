@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+// import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import gsap from 'gsap';
+// import { viewport } from 'three/webgpu';
 
 //Loader
 // const loader = new GLTFLoader();
@@ -120,6 +121,7 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix()
   renderer.setSize(sizes.width, sizes.height)
   renderer.render(scene, camera)
+  // mesh.position.x = window.innerWidth / 4 - 100
 })
 
 const loop = () => {
