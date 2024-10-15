@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.webgl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+nav {
+  color: white;
+  position: relative;
+  display: flex;
+  z-index: 2;
+  padding: 4rem 8rem;
+  justify-content: space-between;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+}
+
+.title {
+  position: absolute;
+  color: white;
+  z-index: 2;
+  font-size: 3rem;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, 75%);
+}
+
+.background {
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url(models/2k_stars_milky_way.jpg)
+}
