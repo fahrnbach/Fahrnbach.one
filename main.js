@@ -135,10 +135,10 @@ const sizes = {
 //Let there be Light
 const light = new THREE.PointLight(0xffffff, 100, 100)
 light.position.set(0, 10, 10)
-light.intensity = 1000
+light.intensity = 750
 scene.add(light)
 
-const ambientLight = new THREE.AmbientLight( 0x404040, 50 ); // soft white light
+const ambientLight = new THREE.AmbientLight( 0x404040, 3); // soft white light
 scene.add( ambientLight );
 
 
