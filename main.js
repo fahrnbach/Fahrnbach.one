@@ -86,11 +86,12 @@ for (let i = 0; i < 90; i++) { //Can Adjust Number (90)
   let smokeElement = new THREE.Mesh(smokeGeometry, smokeMaterial);
   smokeElement.scale.set(.1, .1, .1); // Set Scale to Double Scale
   // Position smoke "Mirrors" at random location
-  smokeElement.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 50 - 10)
+  smokeElement.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * -50 - 10)
   smokeElement.rotation.z = Math.random() * 360;
-  i % 2 === 0 ? smokeElement.rotation.y = 180 : smokeElement.rotation.y = 0
+  // i % 2 === 0 ? smokeElement.rotation.y = 180 : smokeElement.rotation.y = 0
 
   scene.add(smokeElement)
+  // smokeMaterial.color = 
   smokeParticles.push(smokeElement); //add to array of smoke textures
 }
 
@@ -100,12 +101,13 @@ for (let i = 0; i < 90; i++) { //Can Adjust Number (90)
   let smokeElement = new THREE.Mesh(smokeGeometry, smokeMaterial);
   smokeElement.scale.set(.1, .1, .1); // Set Scale to Double Scale
   // Position smoke "Mirrors" at random location
-  smokeElement.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * -50 + 10)
+  smokeElement.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 80)
   smokeElement.rotation.z = Math.random() * 360;
-  i % 2 === 0 ? smokeElement.rotation.y = 180 : smokeElement.rotation.y = 0
+  // i % 2 === 0 ? smokeElement.rotation.y = 180 : smokeElement.rotation.y = 0
 
   scene.add(smokeElement)
-  smokeParticles.push(smokeElement); //add to array of smoke textures
+  // smokeMaterial.color = 
+  smokeParticles2.push(smokeElement); //add to array of smoke textures
 }
 
 const geometry = new THREE.SphereGeometry(3, 64, 64);
@@ -194,7 +196,7 @@ const loop = () => {
     smokeParticles[i].rotation.z +=(delta * 0.12);
   }
   delta = clock.getDelta(); //amount of time passed since last clock update  // #Smoke Texture
-  for (let i=0; i < smokeParticles2.length; i++) {
+  for (let i=0; i < smokeParticles.length; i++) {
     smokeParticles2[i].rotation.z +=(delta * 0.12);
   }
 }
@@ -213,10 +215,10 @@ tl.fromTo('.title', {opacity: 0}, {opacity: 1})
 // Mouse Animation Colorrrrr
 let mouseDown = false;
 let rgb = []
-window.addEventListener('mousedown', () => (mouseDown = true))
-window.addEventListener('mouseup', () => (mouseDown = false))
+window.addEventListener('pointerdown', () => (mouseDown = true))
+window.addEventListener('pointerup', () => (mouseDown = false))
 
-window.addEventListener('mousemove', (e) => {
+window.addEventListener('pointermove', (e) => {
   if (mouseDown) {
     rgb = [
       Math.round((e.pageX / sizes.width)  * 255),
