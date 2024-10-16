@@ -21,6 +21,9 @@ const sizes = {
   height: window.innerHeight,
 }
 
+const about = document.querySelector('.about')
+const html = document.querySelector('html')
+
 // #region Smoke Init
 
 scene.fog = new THREE.Fog(0xc0f0ff, 0.0015)// # THREE SMOKE // Color, Near
@@ -197,10 +200,14 @@ tl.fromTo('nav', {y: '-150%'}, {y: '0%'})
 // Mouse Animation Colorrrrr
 let mouseDown = false;
 let rgb = []
-window.addEventListener('pointerdown', () => {
+
+window.addEventListener('pointerdown', (e) => {
   mouseDown = true
-  gsap.to('.name', {opacity: 0})
-  gsap.to('.title', {opacity: 0})
+  console.log(e.target)
+  if (e.target != about){
+    gsap.to('.name', {opacity: 0})
+    gsap.to('.title', {opacity: 0})
+  }
 })
 window.addEventListener('pointerup', () => (mouseDown = false))
 
@@ -223,9 +230,19 @@ window.addEventListener('pointermove', (e) => {
   //   earth.material.color = '#ffffff'
   // }
 })
-
+let scrollPosition = 0
 window.addEventListener('scroll', () => {
   gsap.to('.name', {opacity: 1})
+  if (html.scrollTop > window.innerHeight / 2 * 1.7 && scrollPosition < html.scrollTop) {
+
+    gsap.to('.aboutMe', {y: '250vh', duration: 1.5})
+    gsap.to('html', {y: window.innerHeight * 2, duration: 1.5})
+    html.scroll(0, window.innerHeight * 2)
+    scrollPosition = html.scrollTop
+  }
+  // if (html.scrollTop < window.innerHeight / 2 * 1.7) {
+  //   gsap.to('.aboutMe', {y: '-250vh'})
+  // }
 })
 
 // #endregion Animation Magic

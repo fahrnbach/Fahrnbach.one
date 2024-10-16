@@ -118,7 +118,7 @@ nav ul {
   left: 10px;
   /* border: 2px solid #bbffff; */
   background-color: #004e52;
-  z-index: 3;
+  z-index: 14;
 }
 
 .availabilityTextContainer {
@@ -238,20 +238,78 @@ nav ul {
 /* #region About Section */
 
 .about {
+  display: flex;
   position: absolute;
+  justify-content: end;
   width: 100vw;
   height: 100vh;
   border-radius: 10px;
   background-color: #202020cc;
   z-index: 10;
+  overflow-x: scroll;
 }
 
-/* .aboutSection {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  border-radius: 10px;
-  background-color: #202020cc;
-  z-index: 10;
-} */
+.aboutMe {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: end;
+  /* flex-direction: column; */
+  gap: 2.5rem;
+  align-content: flex-start;
+  justify-content: center;
+  height: 200%;
+  width: 30%;
+  top: -250vh;
+  background-color: #00000077;
+}
+
+.aboutPhotoContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  width: 100%
+}
+
+.aboutPhoto {
+  position: relative;
+  display: flex;
+  align-self: flex-start;
+  /* justify-self: center; */
+  width: 40%;
+  aspect-ratio: 1/1;
+  background-color: red;
+  background-image: url(public/cat.svg);
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+.lineBreak {
+  font-family: "bagatela", serif;
+font-weight: 800;
+font-style: normal;
+  color: wheat;
+}
+
+.aboutTextContainer {
+  position: relative;
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  text-align: justify;
+  font-family: darkmode-mono-off, sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+.aboutText {
+  width: 90%;
+}
+
+
+
+
 /* #endregion About Section */
