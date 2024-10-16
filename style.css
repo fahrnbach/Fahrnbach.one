@@ -87,6 +87,31 @@ nav ul {
   z-index: 14;
 }
 
+.up {
+  /* width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-self: center;
+  justify-self: center; */
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  text-decoration: none;
+  color: white;
+  
+  font-size: 9rem;
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+  pointer-events: none;
+  opacity: .8;
+  z-index: 14;
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+
+
 .title {
   position: fixed;
   display: flex;

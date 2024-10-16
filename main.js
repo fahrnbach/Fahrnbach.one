@@ -198,11 +198,11 @@ tl.fromTo('nav', {y: '-150%'}, {y: '0%'})
 // Tween.to(earth.rotation, 10, {y: Math.PI * 2, repeat: -1, ease: Linear.easeNone});
 
 // Mouse Animation Colorrrrr
-let mouseDown = false;
+let pointerDown = false;
 let rgb = []
 
 window.addEventListener('pointerdown', (e) => {
-  mouseDown = true
+  pointerDown = true
   console.log(e.target)
   if (e.target != about){
     gsap.to('.name', {opacity: 0})
@@ -212,7 +212,7 @@ window.addEventListener('pointerdown', (e) => {
 window.addEventListener('pointerup', () => (mouseDown = false))
 
 window.addEventListener('pointermove', (e) => {
-  if (mouseDown) {
+  if (pointerDown) {
     rgb = [
       Math.round((e.pageX / sizes.width)  * 255),
       Math.round((e.pageY / sizes.height)  * 255),
@@ -231,19 +231,37 @@ window.addEventListener('pointermove', (e) => {
   // }
 })
 let scrollPosition = 0
+let hasScrolled = false
 window.addEventListener('scroll', () => {
   gsap.to('.name', {opacity: 1})
   if (html.scrollTop > window.innerHeight / 2 * 1.7 && scrollPosition < html.scrollTop) {
-
-    gsap.to('.aboutMe', {y: '250vh', duration: 1.5})
-    gsap.to('html', {y: window.innerHeight * 2, duration: 1.5})
+    
     html.scroll(0, window.innerHeight * 2)
+    gsap.to('.aboutMe', {y: '250vh', duration: 1.5})
+    gsap.to('.up', {display: 'none'})
+    // hasScrolled = true
     scrollPosition = html.scrollTop
   }
   // if (html.scrollTop < window.innerHeight / 2 * 1.7) {
   //   gsap.to('.aboutMe', {y: '-250vh'})
   // }
 })
+
+setTimeout(() => {
+  const tl2 = gsap.timeline({defaults: { duration: 1}})
+  if (html.scrollTop < window.innerHeight) {
+    console.log('hii')
+    tl2.fromTo('.up', {y: '-10%', opacity: 0}, {y: '0%', opacity: 1})
+    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})
+    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})  
+    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up', {y: '-10%', opacity: 0}, {y: '0%', opacity: 1})
+    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})
+  }
+}, 10000);
 
 // #endregion Animation Magic
 
