@@ -138,8 +138,8 @@ light.position.set(0, 10, 10)
 light.intensity = 1000
 scene.add(light)
 
-// const ambientLight = new THREE.AmbientLight( 0x404040, 5 ); // soft white light
-// scene.add( ambientLight );
+const ambientLight = new THREE.AmbientLight( 0x404040, 50 ); // soft white light
+scene.add( ambientLight );
 
 
 // Camera
