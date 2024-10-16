@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: crosshair;
 }
 
 body {
@@ -9,51 +10,25 @@ body {
   background-color: black;
 }
 
-/* #Entry!*/
+.lander {
+  width: 100vw;
+  height: 100vh;
+  overflow: clip;
+}
+
+/* #Region Init*/
 .webgl {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
 }
 
-nav {
-  color: white;
-  position: relative;
-  display: flex;
-  z-index: 2;
-  padding: 4rem 8rem;
-  justify-content: space-between;
-}
-
-nav a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 2rem;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: end;
-  gap: 4rem;
-  font-size: 1.5rem;
-}
-
-.title {
-  position: absolute;
-  color: white;
-  z-index: 2;
-  font-size: 3rem;
-  left: 50%;
-  top: 75%;
-  transform: translate(-50%, 75%);
-}
 
 .background {
-  position: absolute;
-  z-index: 0;
+  position: fixed;
+  z-index: -1;
+  top: 0;
   width: 100vw;
   height: 100vh;
   /* background: url(public/models/Firefly_colorful_nebulae.jpg); */
@@ -63,12 +38,78 @@ nav ul {
   /* backdrop-filter: brightness(30%); */
   opacity: .3;
 }
+/* #endregion Init */
 
-/* #Availibility Badge */
+/* #region Navigation */
+
+nav {
+  color: white;
+  position: fixed;
+  top: 0;
+  display: flex;
+  z-index: 2;
+  padding: 4rem 8rem;
+  justify-content: space-between;
+}
+
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: end;
+  gap: 4rem;
+  font-size: 1.5rem;
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+}
+/* #endRegion Navigation */
+
+/* #region Information */
+.name {
+  /* width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-self: center;
+  justify-self: center; */
+  position: fixed;
+  bottom: 20px;
+  left: 50px;
+  text-decoration: none;
+  color: white;
+  
+  font-size: 9rem;
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+  pointer-events: none;
+  opacity: .8;
+  z-index: 14;
+}
+
+.title {
+  position: fixed;
+  display: flex;
+  color: white;
+  z-index: 2;
+  right: 100px;
+  top: 50px;
+  text-wrap: nowrap;
+  /* transform: translate(-50%, 75%); */
+
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+  pointer-events: none;
+  font-size: 3rem;
+}
+/* #endRegion Navigation */
+
+/* #region Availability Badge */
 
 .availabilityBadge {
   display: flex;
-  position: absolute;
+  position: fixed;
   align-content: center;
   justify-content: space-around;
   height: 20px;
@@ -130,31 +171,87 @@ nav ul {
   }
 }
 
-/* #Media Queries */
+/* #endregion Availability Badge */
 
+/* #region Media Queries */
+/* ! */
 @media only screen and (max-width: 550px) {
-  nav a {
-    position: absolute;
-    top: 20px;
+  .name {
+    position: fixed;
+    top: 50px;
     left: 25px;
-    font-size: 1.5rem;
+    font-size: 3rem;
+  }
+
+  nav {
+    width: 100%;
+    align-content: end;
+    justify-content: end;
   }
 
   nav ul {
-    position: absolute;
+    position: fixed;
+    top: 90px;
+    right: 0;
     flex-wrap: wrap;
     justify-content: end;
+    justify-self: end;
     width: 25%;
-    top: 70px;
-    right: 15px;
     font-size: 1.5rem;
     gap: 3rem;
+    /* display: none; */
 }
 
-.title {
-  top: 75%;
-  width: 80%;
-  transform: translate(-45%, 75%);
+  .title {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    top: 75%;
+    right: 0%;
+    width: 100%;
+    font-size: 2rem;
+  }
+
+.reload {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: transparent;
+  background-image: url(public/models/Refresh.svg);
+  z-index: 5;
 }
 
+.reload:hover,
+.reload:active {
+  background-color: #00000033;
+  opacity: .7;
+  transition: 1s opacity ease;
 }
+
+
+}
+/* #endregion Media Queries */
+
+/* #region About Section */
+
+.about {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 10px;
+  background-color: #202020cc;
+  z-index: 10;
+}
+
+/* .aboutSection {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 10px;
+  background-color: #202020cc;
+  z-index: 10;
+} */
+/* #endregion About Section */

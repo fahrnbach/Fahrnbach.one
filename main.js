@@ -2,6 +2,14 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
 
+console.warn("Hi, Thanks So much for Visiting!", "\n", "I am available for hire, and seeking work!")
+console.log('%c Contact Info:', 'background: #222; color: #ff0808')
+console.log('%c jacob@fahrnbach.one', 'background: #222; color: #bada55')
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
 let clock = new THREE.Clock(); // # THREE SMOKE
 let delta = 0; // # THREE SMOKE
 
@@ -66,7 +74,7 @@ const earthTexture = new THREE.TextureLoader().load( "models/2k_earth_daymap.jpg
 const geometry = new THREE.SphereGeometry(3, 64, 64);
 // !The Color
 const material = new THREE.MeshStandardMaterial({
-    color: '#00ffa3',
+    color: '#ffffff',
     roughness: 0.5,
     map: earthTexture,
     emissive: 0x22222
@@ -135,14 +143,14 @@ controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = false
 controls.autoRotate = true
-controls.autoRotateSpeed = 5
+controls.autoRotateSpeed = 3
 
 //#endregion Lights, Camera, Action
 // #region Resize Function
 // Resize
 window.addEventListener('resize', () => {
   //Update Sizes
-  console.log(window.innerWidth)
+  // console.log(window.innerWidth)
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
   //Update Camera
@@ -159,7 +167,7 @@ const loop = () => {
   controls.update()
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop)
-  earth.rotateY(0.004)
+  earth.rotateY(0.002)
   moonObj.rotateY(0.005)
   // moonObj.rotateX(0.001)
   // moonObj.rotateZ(0.007)
@@ -184,13 +192,16 @@ tl.duration(7)
 tl.fromTo(earth.scale, {z: 0, x: 0, y: 0}, {z: 1, x: 1, y: 1})
 tl.duration(1)
 tl.fromTo('nav', {y: '-150%'}, {y: '0%'})
-tl.fromTo('.title', {opacity: 0}, {opacity: 1})
 // Tween.to(earth.rotation, 10, {y: Math.PI * 2, repeat: -1, ease: Linear.easeNone});
 
 // Mouse Animation Colorrrrr
 let mouseDown = false;
 let rgb = []
-window.addEventListener('pointerdown', () => (mouseDown = true))
+window.addEventListener('pointerdown', () => {
+  mouseDown = true
+  gsap.to('.name', {opacity: 0})
+  gsap.to('.title', {opacity: 0})
+})
 window.addEventListener('pointerup', () => (mouseDown = false))
 
 window.addEventListener('pointermove', (e) => {
@@ -207,7 +218,24 @@ window.addEventListener('pointermove', (e) => {
     let newColor = new THREE.Color(`rgb(${rgb.join(',')})`)
     gsap.to(earth.material.color, {r: newColor.r, g: newColor.g, b: newColor.b})
   }
+
+  // else if(!mouseDown) {
+  //   earth.material.color = '#ffffff'
+  // }
+})
+
+window.addEventListener('scroll', () => {
+  gsap.to('.name', {opacity: 1})
 })
 
 // #endregion Animation Magic
+
+// #region Nav
+let reloadButton = document.querySelector('.reload')
+reloadButton.addEventListener('pointerup', () => {
+  window.location.reload()
+  // console.log("Hi")
+})
+
+//#endregion Nav
 
