@@ -8,6 +8,7 @@ body {
   overflow-x: hidden;
 }
 
+/* #Entry!*/
 .webgl {
   position: absolute;
   top: 0;
@@ -56,6 +57,74 @@ nav ul {
   height: 100vh;
   background: url(public/models/2k_stars_milky_way.jpg)
 }
+
+/* #Availibility Badge */
+
+.availabilityBadge {
+  display: flex;
+  position: absolute;
+  align-content: center;
+  justify-content: space-around;
+  height: 20px;
+  /* width: 13%; */
+  top: 0px;
+  left: 10px;
+  /* border: 2px solid #bbffff; */
+  background-color: #004e52;
+  z-index: 3;
+}
+
+.availabilityTextContainer {
+  color: #ddffff;
+  font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.availabilityDotContainer {
+  position: relative;
+  display: flex;
+  justify-self: end;
+  align-self: center;
+  height: 100%;
+  aspect-ratio: 1/1;
+}
+
+.availabilityDot {
+  position: relative;
+  display: flex;
+  justify-self: end;
+  align-self: center;
+  height: 50%;
+  aspect-ratio: 1/1;
+  /* margin-left: 5px; */
+
+  background-color: red;
+  border-radius: 50%;
+  border: 1px solid white;
+  opacity: .1;
+  animation: blink linear infinite 5s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: .5;
+    height: 40%;
+  }
+
+  50% {
+    opacity: 1;
+    height: 50%;
+  }
+
+  100% {
+    opacity: .5;
+    height: 40%;
+  }
+}
+
+/* #Media Queries */
 
 @media only screen and (max-width: 550px) {
   nav a {

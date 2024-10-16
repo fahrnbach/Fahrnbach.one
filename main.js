@@ -11,8 +11,22 @@ import gsap from 'gsap';
 // dracoLoader.setDecoderPath( '/examples/jsm/libs/draco/' );
 // loader.setDRACOLoader( dracoLoader );
 
+let clock = new THREE.Clock(); // # THREE SMOKE
+let delta = 0; // # THREE SMOKE
+
+
+
+
+
+
+
 //Scene 
 const scene = new THREE.Scene();
+
+scene.fog = new THREE.Fog(0xc0f0ff, 0.0015)// # THREE SMOKE // Color, Near
+
+
+
 
 // Load a glTF resource
 // loader.load(
@@ -52,13 +66,38 @@ const scene = new THREE.Scene();
 // material.repeat.set( 4, 4 );
 
 const texture = new THREE.TextureLoader().load( "models/2k_earth_daymap.jpg" );
+const smokeTexture = new THREE.TextureLoader().load("models/smoke/webp/White_Cloud.webp")// #Smoke Texture
+smokeTexture.colorSpace = "srgb"; // #Smoke Texture
+const smokeGeometry = new THREE.PlaneGeometry(300,300);  // #Smoke Texture
+ // #Smoke Texture
+const smokeMaterial = new THREE.MeshLambertMaterial({
+    color: 0x0000ff, // vertex color = color x colormap
+    map: smokeTexture,
+    emissive: 0x222222, // color of emissive light
+    opacity: 0.15,
+    transparent: true
+});
+
+let smokeParticles = []  // #Smoke Texture
+// Iterates through smoke 'Mirrors'
+for (let i = 0; i < 90; i++) { //Can Adjust Number (90)
+  let smokeElement = new THREE.Mesh(smokeGeometry, smokeMaterial);
+  smokeElement.scale.set(.1, .1, .1); // Set Scale to Double Scale
+  // Position smoke "Mirrors" at random location
+  smokeElement.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 10)
+  smokeElement.rotation.z = Math.random() * 360;
+
+  scene.add(smokeElement)
+  smokeParticles.push(smokeElement); //add to array of smoke textures
+}
 
 const geometry = new THREE.SphereGeometry(3, 64, 64);
 // !The Color
 const material = new THREE.MeshStandardMaterial({
     color: '#00ffa3',
     roughness: 0.5,
-    map: texture
+    map: texture,
+    emissive: 0x22222
 })
 // !The Combination of Color and Shape
 const mesh = new THREE.Mesh(geometry, material);
@@ -93,7 +132,8 @@ scene.add(camera)
 //Renderer
 const canvas = document.querySelector('.webgl');
 const renderer = new THREE.WebGLRenderer({canvas})
-renderer.setPixelRatio(2)
+renderer.setPixelRatio(window.devicePixelRatio)  // # THREE SMOKE
+// renderer.setPixelRatio(2)
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
 renderer.setClearColor( 0xffffff, 0);
@@ -128,6 +168,11 @@ const loop = () => {
   controls.update()
   renderer.render(scene, camera);
   window.requestAnimationFrame(loop)
+  // #Smoke Texture
+  delta = clock.getDelta(); //amount of time passed since last clock update  // #Smoke Texture
+  for (let i=0; i < smokeParticles.length; i++) {
+    smokeParticles[i].rotation.z +=(delta * 0.12);
+  }
 }
 
 loop()
