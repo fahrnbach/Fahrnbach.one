@@ -6,14 +6,34 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 gsap.registerPlugin(ScrollToPlugin)
 
 console.warn("Hi, Thanks So much for Visiting!", "\n", "I am available for hire, and seeking work!")
-console.log('%c Contact Info:', 'background: #222; color: #ff0808')
-console.log('%c jacob@fahrnbach.one', 'background: #222; color: #bada55')
+// console.log('%c Contact Info:', 'background: #222; color: #ff0808')
+// console.log('%c jacob@fahrnbach.one', 'background: #222; color: #bada55')
+
+let welcome = () => {
+  let message =
+    '%c 🔥 Thanks For Visiting! Email jacob@fahrnbach.one 🔥';
+  let styles = [
+    'font-size: 12px',
+    'color: #fffce1',
+    'font-family: monospace',
+    'background: #202020',
+    'display: inline-block',
+    'padding: 1rem 3rem',
+    'border: 1px solid #fffce1',
+    'border-radius: 4px;'
+  ].join(';');
+  console.log(message, styles);
+};
+
+welcome()
 
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
 }
 
 window.scrollTo(0, 0)
+
+let shouldRender = true
 
 let clock = new THREE.Clock(); // # THREE SMOKE
 let delta = 0; // # THREE SMOKE
@@ -172,27 +192,52 @@ window.addEventListener('resize', () => {
 //  #endregion Resize Function
 // #region Renderer Loop
 const loop = () => {
-  controls.update()
-  renderer.render(scene, camera);
-  window.requestAnimationFrame(loop)
-  earth.rotateY(0.002)
-  moonObj.rotateY(0.005)
-  // moonObj.rotateX(0.001)
-  // moonObj.rotateZ(0.007)
-  // #Smoke Texture
-  delta = clock.getDelta(); //amount of time passed since last clock update  // #Smoke Texture
-  for (let i=0; i < smokeParticles.length; i++) {
-    smokeParticles[i].rotation.z +=(delta * 0.12);
-  }
-  delta = clock.getDelta(); //amount of time passed since last clock update  // #Smoke Texture
-  for (let i=0; i < smokeParticles.length; i++) {
-    smokeParticles2[i].rotation.z +=(delta * 0.12);
+  if (shouldRender) {
+    controls.update()
+    renderer.render(scene, camera);
+    window.requestAnimationFrame(loop)
+    earth.rotateY(0.002)
+    moonObj.rotateY(0.005)
+    // moonObj.rotateX(0.001)
+    // moonObj.rotateZ(0.007)
+    // #Smoke Texture
+    delta = clock.getDelta(); //amount of time passed since last clock update  // #Smoke Texture
+    for (let i=0; i < smokeParticles.length; i++) {
+      smokeParticles[i].rotation.z +=(delta * 0.12);
+    }
+    delta = clock.getDelta(); //amount of time passed since last clock update  // #Smoke Texture
+    for (let i=0; i < smokeParticles.length; i++) {
+      smokeParticles2[i].rotation.z +=(delta * 0.12);
+    }
   }
 }
 
 loop()
 
 //#endregion Renderer Loop
+
+// #region Three Click Detection
+// canvas.addEventListener('mousedown', onMouseDown, false);
+
+// function onMouseDown(e) {
+//     var vectorMouse = new THREE.Vector3( //vector from camera to mouse
+//         -(window.innerWidth/2-e.clientX)*2/window.innerWidth,
+//         (window.innerHeight/2-e.clientY)*2/window.innerHeight,
+//         -1/Math.tan(22.5*Math.PI/180)); //22.5 is half of camera frustum angle 45 degree
+//     vectorMouse.applyQuaternion(camera.quaternion);
+//     vectorMouse.normalize();        
+
+//     var vectorObject = new THREE.Vector3(); //vector from camera to object
+//     vectorObject.set(moon.x - camera.position.x,
+//                      moon.y - camera.position.y,
+//                      moon.z - camera.position.z);
+//     vectorObject.normalize();
+//     if (vectorMouse.angleTo(vectorObject)*180/Math.PI < 1) {
+//         //mouse's position is near object's position
+//       console.log('moon')
+//     }
+// }
+// #endregion Three Click Detection
 // #region Animation Magic
 // Timeline Magic
 // &Three Stuff
@@ -222,7 +267,7 @@ window.addEventListener('pointerdown', (e) => {
   }
 // !Detecting if device is mobile/tablet for nav slide up animation
     if (window.innerWidth <= 650 && !animationTriggered) {
-      tl.fromTo('.nav', {y: '0%'}, {y: '-150%'})
+      tl.fromTo('.nav', {y: '0%'}, {y: '-225%'})
     }
     animationTriggered = true
 })
@@ -303,7 +348,7 @@ mobileButton.addEventListener('pointerup', () => {
     border: 'inherit',
     outline: '2px solid white'
   })
-    gsap.to('.name', {y: bottomDistance, backgroundColor: '#000000bb', height: '20vh', duration: 1});
+    gsap.to('.name', {y: bottomDistance - 1, backgroundColor: '#000000bb', height: '20vh', duration: 1});
     setTimeout(() => {
       gsap.to(window, { duration: 1, scrollTo: { y: "#about"} });
     }, 10);
