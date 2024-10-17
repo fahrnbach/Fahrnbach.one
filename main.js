@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import gsap from 'gsap';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin)
 
 console.warn("Hi, Thanks So much for Visiting!", "\n", "I am available for hire, and seeking work!")
 console.log('%c Contact Info:', 'background: #222; color: #ff0808')
@@ -9,6 +12,8 @@ console.log('%c jacob@fahrnbach.one', 'background: #222; color: #bada55')
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
 }
+
+window.scrollTo(0, 0)
 
 let clock = new THREE.Clock(); // # THREE SMOKE
 let delta = 0; // # THREE SMOKE
@@ -190,27 +195,39 @@ loop()
 //#endregion Renderer Loop
 // #region Animation Magic
 // Timeline Magic
+// &Three Stuff
 const tl = gsap.timeline({defaults: { duration: 1}})
 tl.duration(7)
 tl.fromTo(earth.scale, {z: 0, x: 0, y: 0}, {z: 1, x: 1, y: 1})
 tl.duration(1)
-tl.fromTo('nav', {y: '-150%'}, {y: '0%'})
-// Tween.to(earth.rotation, 10, {y: Math.PI * 2, repeat: -1, ease: Linear.easeNone});
 
-// Mouse Animation Colorrrrr
+// ^Nav Stuff
+tl.fromTo('.info', {opacity:'0'}, {opacity: '1'})
+// !Detecting if device is desktop for nav pulldown animation
+if (window.innerWidth > 650) {
+  tl.fromTo('.nav', {y: '-150%'}, {y: '0%'})
+}
+
+// ^Mouse has clicked animations
 let pointerDown = false;
 let rgb = []
+let animationTriggered = false
 
 window.addEventListener('pointerdown', (e) => {
   pointerDown = true
-  console.log(e.target)
+  // console.log(e.target)
   if (e.target != about){
     gsap.to('.name', {opacity: 0})
-    gsap.to('.title', {opacity: 0})
+    gsap.to('.info', {opacity: 0})
   }
+// !Detecting if device is mobile/tablet for nav slide up animation
+    if (window.innerWidth <= 650 && !animationTriggered) {
+      tl.fromTo('.nav', {y: '0%'}, {y: '-150%'})
+    }
+    animationTriggered = true
 })
-window.addEventListener('pointerup', () => (mouseDown = false))
-
+window.addEventListener('pointerup', () => (pointerDown = false))
+// &Three Stuff
 window.addEventListener('pointermove', (e) => {
   if (pointerDown) {
     rgb = [
@@ -225,20 +242,22 @@ window.addEventListener('pointermove', (e) => {
     let newColor = new THREE.Color(`rgb(${rgb.join(',')})`)
     gsap.to(earth.material.color, {r: newColor.r, g: newColor.g, b: newColor.b})
   }
-
-  // else if(!mouseDown) {
-  //   earth.material.color = '#ffffff'
-  // }
 })
+// ^Nav Stuff
 let scrollPosition = 0
 let hasScrolled = false
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', (e) => {
+  if (e.target == about) {
+    gsap.to('.name', {y: 0})
+  }
   gsap.to('.name', {opacity: 1})
   if (html.scrollTop > window.innerHeight / 2 * 1.7 && scrollPosition < html.scrollTop) {
     
-    html.scroll(0, window.innerHeight * 2)
+    // html.scroll(0, window.innerHeight * 2)
+    gsap.to(window, { duration: .5, scrollTo: { y: "#about"} });
     gsap.to('.aboutMe', {y: '250vh', duration: 1.5})
-    gsap.to('.up', {display: 'none'})
+    gsap.to('.up-button-container', {display: 'none'})
+    gsap.to('.up-button', {display: 'none'})
     // hasScrolled = true
     scrollPosition = html.scrollTop
   }
@@ -250,18 +269,58 @@ window.addEventListener('scroll', () => {
 setTimeout(() => {
   const tl2 = gsap.timeline({defaults: { duration: 1}})
   if (html.scrollTop < window.innerHeight) {
-    console.log('hii')
-    tl2.fromTo('.up', {y: '-10%', opacity: 0}, {y: '0%', opacity: 1})
-    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
-    tl2.fromTo('.up', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})
-    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
-    tl2.fromTo('.up', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})  
-    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
-    tl2.fromTo('.up', {y: '-10%', opacity: 0}, {y: '0%', opacity: 1})
-    tl2.fromTo('.up', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
-    tl2.fromTo('.up', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})
+    // console.log('hii')
+    tl2.fromTo('.up-button', {y: '-10%', opacity: 0}, {y: '0%', opacity: 1})
+    tl2.fromTo('.up-button', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up-button', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})
+    tl2.fromTo('.up-button', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up-button', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})  
+    tl2.fromTo('.up-button', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up-button', {y: '-10%', opacity: 0}, {y: '0%', opacity: 1})
+    tl2.fromTo('.up-button', {y: '0',  opacity: 1}, {y: '-10%',  opacity: .5})
+    tl2.fromTo('.up-button', {y: '-10%',  opacity: .5}, {y: '0%', opacity: 1})
   }
-}, 10000);
+}, 5000);
+
+let mobilePressTime = null 
+let mobileButton = document.querySelector('.mobile-continue-button')
+mobileButton.addEventListener('pointerdown', () => {
+  mobilePressTime = Date.now();
+  gsap.to('.mobile-continue-button',{
+    backgroundColor: '#202020bb',
+    border: '2px solid orange',
+    outline: '2px solid white'
+  })
+})
+
+
+const name = document.querySelector('.name')
+let bottomDistance = (window.innerHeight - name.clientHeight) - 40
+
+mobileButton.addEventListener('pointerup', () => {
+  gsap.to('.mobile-continue-button',{
+    backgroundColor: '#202020bb',
+    border: 'inherit',
+    outline: '2px solid white'
+  })
+    gsap.to('.name', {y: bottomDistance, backgroundColor: '#000000bb', height: '20vh', duration: 1});
+    setTimeout(() => {
+      gsap.to(window, { duration: 1, scrollTo: { y: "#about"} });
+    }, 10);
+    // !Name-Animation on Entry
+})
+
+const upButton = document.querySelector('.up-button');
+upButton.addEventListener('pointerup', () => {
+  gsap.to(window, { duration: 1, scrollTo: { y: "#about"} });
+})
+
+const exitAbout = document.querySelector('.exit-about');
+exitAbout.addEventListener('pointerup', () => {
+  gsap.to(window, { duration: 1, scrollTo: { y: "#lander"} });
+  // !Name-Animation on Exit
+  gsap.to('.name', {y: 0, backgroundColor: 'transparent', duration: 1});
+})
 
 // #endregion Animation Magic
 
@@ -269,7 +328,6 @@ setTimeout(() => {
 let reloadButton = document.querySelector('.reload')
 reloadButton.addEventListener('pointerup', () => {
   window.location.reload()
-  // console.log("Hi")
 })
 
 //#endregion Nav

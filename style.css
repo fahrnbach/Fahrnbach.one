@@ -42,77 +42,109 @@ body {
 
 /* #region Navigation */
 
-nav {
+.nav {
   color: white;
   position: fixed;
   top: 0;
   display: flex;
+  flex-wrap: wrap;
   z-index: 2;
-  padding: 4rem 8rem;
+  padding: 4rem 8rem;;
+  padding: 3.5rem clamp(2vw, 8rem, 10vw);
   justify-content: space-between;
+  z-index: 20;
+  /* padding: 0; */
 }
 
 
-nav ul {
+.nav ul {
+  position: relative;
   list-style: none;
   display: flex;
   justify-content: end;
   gap: 4rem;
-  font-size: 1.5rem;
+  font-size: clamp(2vw, 2rem, 3vw);
   font-family: "myriad-pro", sans-serif, "Arial";
   font-weight: 600;
   font-style: normal;
+  /* text-decoration: underline;
+  text-underline-offset: .5vw; */
 }
 /* #endRegion Navigation */
 
 /* #region Information */
-.name {
-  /* width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-self: center;
-  justify-self: center; */
+
+.name-container {
   position: fixed;
-  bottom: 20px;
-  left: 50px;
-  text-decoration: none;
-  color: white;
-  
-  font-size: 9rem;
-  font-family: "myriad-pro", sans-serif, "Arial";
-  font-weight: 600;
-  font-style: normal;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  width: 60vw;
+  height: 100vh;
+  top: 0px;
+  z-index: 21;
   pointer-events: none;
-  opacity: .8;
-  z-index: 14;
 }
 
-.up {
+.name {
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  align-self: flex-end;
+  /* justify-self: center; */
+  position: relative;
+  /* bottom: 20px;
+  left: 50px; */
+  text-decoration: none;
+  color: white;
+  
+  font-size: 9rem;
+  font-size: clamp(4px, 5vw + 5rem, 250px);
+  /* font-size: 9em; */
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+  opacity: .8;
+  z-index: 24;
+  padding-left: 25px;
+  padding-bottom: 25px;
+  pointer-events: none;
+  /* will-change: transform */
+}
+
+.up-button-container {
   /* width: 100vw;
   height: 100vh;
   display: flex;
   align-self: center;
   justify-self: center; */
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 50px;
-  text-decoration: none;
+  z-index: 21;
+}
+
+.up-button {
   color: white;
-  
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
   font-size: 9rem;
   font-family: "myriad-pro", sans-serif, "Arial";
   font-weight: 600;
   font-style: normal;
-  pointer-events: none;
-  opacity: .8;
+  /* pointer-events: none; */
+  opacity: 0;
   z-index: 14;
   transform: rotate(90deg);
-  opacity: 0;
+  user-select: none;
 }
 
 
 
-.title {
+.info {
   position: fixed;
   display: flex;
   color: white;
@@ -127,6 +159,7 @@ nav ul {
   font-style: normal;
   pointer-events: none;
   font-size: 3rem;
+  font-size: clamp(3vw, 3rem, 4vw);
 }
 /* #endRegion Navigation */
 
@@ -198,68 +231,6 @@ nav ul {
 
 /* #endregion Availability Badge */
 
-/* #region Media Queries */
-/* ! */
-@media only screen and (max-width: 550px) {
-  .name {
-    position: fixed;
-    top: 50px;
-    left: 25px;
-    font-size: 3rem;
-  }
-
-  nav {
-    width: 100%;
-    align-content: end;
-    justify-content: end;
-  }
-
-  nav ul {
-    position: fixed;
-    top: 90px;
-    right: 0;
-    flex-wrap: wrap;
-    justify-content: end;
-    justify-self: end;
-    width: 25%;
-    font-size: 1.5rem;
-    gap: 3rem;
-    /* display: none; */
-}
-
-  .title {
-    display: flex;
-    position: fixed;
-    justify-content: center;
-    top: 75%;
-    right: 0%;
-    width: 100%;
-    font-size: 2rem;
-  }
-
-.reload {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  border: none;
-  background-color: transparent;
-  background-image: url(public/models/Refresh.svg);
-  z-index: 5;
-}
-
-.reload:hover,
-.reload:active {
-  background-color: #00000033;
-  opacity: .7;
-  transition: 1s opacity ease;
-}
-
-
-}
-/* #endregion Media Queries */
-
 /* #region About Section */
 
 .about {
@@ -268,7 +239,7 @@ nav ul {
   justify-content: end;
   width: 100vw;
   height: 100vh;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background-color: #202020cc;
   z-index: 10;
   overflow-x: scroll;
@@ -312,8 +283,8 @@ nav ul {
 
 .lineBreak {
   font-family: "bagatela", serif;
-font-weight: 800;
-font-style: normal;
+  font-weight: 800;
+  font-style: normal;
   color: wheat;
 }
 
@@ -326,15 +297,190 @@ font-style: normal;
   color: white;
   text-align: justify;
   font-family: darkmode-mono-off, sans-serif;
-font-weight: 400;
-font-style: normal;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .aboutText {
   width: 90%;
 }
 
+.mobileContinueContainer {
+  display: none;
+}
 
+.exit-about {
+  width: 50px;
+  position: absolute;
+  height: 50px;
+  top: 0;
+  right: 5px;
+  color: white;
+  font-size: 3rem;
+  background-color: #00000000;
+  border: none;
+  z-index: 25;
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+}
 
+.reload {
+  display: none;
+}
+
+.mobile-continue-container {
+  display: none;
+}
 
 /* #endregion About Section */
+
+/* #region Media Queries */
+/* ! Fix for Scroll Indicator */
+
+@media only screen and (max-width: 1100px) {
+  .up-button-container {
+    padding-bottom: 0px;
+  }
+
+  .name {
+    font-size: 5rem;
+  }
+}
+
+/* ! Mobile + Tablet */
+@media only screen and (max-width: 650px) {
+
+  body {
+    height: 100vh;
+    overflow-y: hidden;
+    background-color: black;
+  }
+
+  .name {
+    position: fixed;
+    top: 50px;
+    /* left: 5px; */
+    font-size: 3rem;
+    padding: 10px;
+  }
+
+  .nav {
+    width: 100%;
+    height: 10%;
+    top: 90%;
+    align-content: center;
+    justify-content: end;
+    width: 100%;
+    z-index: 10;
+  }
+
+  .nav ul {
+    top: 90px;
+    right: 0;
+    flex-wrap: wrap;
+    justify-content: end;
+    justify-self: end;
+    width: 25%;
+    font-size: 1.5rem;
+    gap: 3rem;
+    z-index: 20;
+    /* display: none; */
+}
+
+  .info {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    top: 75%;
+    right: 0%;
+    width: 100%;
+    font-size: clamp(7vw, 3rem, 9vw);
+  }
+
+.reload {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: transparent;
+  background-image: url(public/models/Refresh.svg);
+  z-index: 21;
+}
+
+/* .reload:hover,
+.reload:active {
+  background-color: #00000033;
+  opacity: .7;
+  transition: 1s opacity ease;
+} */
+
+.aboutMe { 
+  position: absolute;
+  /* top: 90vh; */
+  /* height: 110vh; */
+  width: 100vw;
+}
+
+.up-button-container {
+  display: none;
+}
+
+.mobile-continue-container {
+  display: block;
+  position: absolute;
+  display: flex;
+  top: 85dvh;
+  align-content: center;
+  justify-content: center;
+  width: 100vw;
+  height: 10vh;
+  z-index: 11;
+  user-select: none;
+  -webkit-user-select: none;
+  /* pointer-events: none; */
+}
+
+.mobile-continue-button-ring {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid #ffffffbb;
+  user-select: none;
+  -webkit-user-select: none;
+  /* pointer-events: none; */
+}
+
+.mobile-continue-button {
+  /* position: absolute; */
+  margin: auto;
+  width: 90%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: #303030bb;
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 15;
+  outline: 2px solid white;
+}
+
+/* .mobile-continue-button:active,
+.mobile-continue-button:hover {
+  margin: auto;
+  width: 90%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: #202020bb;
+  border: 2px solid orange;
+  outline: 2px solid white;
+} */
+
+}
+/* #endregion Media Queries */
+

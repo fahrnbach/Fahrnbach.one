@@ -10,7 +10,7 @@
     <title>Fahrnbach.one Home</title>
   </head>
   <body>
-  <section class="lander"></section>
+  <section class="lander" id="lander"></section>
     <div class="availabilityBadge">
       <div class="availabilityTextContainer">
         Available
@@ -23,19 +23,29 @@
     </div>
     <div class="background"></div>
     <canvas class="webgl"></canvas>
-    <div class="name">JACOB // <br> FAHRNBACH</div>
-    <div class="up">&#187;</div>
-    <nav>
-      <ul>
-        <li>Explore</li>
-        <li>About</li>
-      </ul>
-    </nav>
+    <div class="name-container">
+      <div class="name">JACOB // <br> FAHRNBACH</div>
+    </div>
+    <div aria-label="Scroll To Continue" class="up-button-container">
+      <button class="up-button">&#187;</button>
+    </div>
+    <div class="mobile-continue-container">
+      <div class="mobile-continue-button-ring">
+        <button class="mobile-continue-button"></button>
+      </div>
+    </div>
     <button aria-label="Reload Button" class="reload"></button>
+    <div class="nav">
+      <ul>
+        <a class="explore-link">Explore</a>
+        <a class="about-link">About</a>
+      </ul>
+    </div>
     <!-- <h1 class="title">Enjoy :)</h1> -->
-    <h1 class="title">Click + Drag</h1>
+    <h1 class="info">Click + Drag</h1>
   </div>
-  <section class="about">
+  <section class="about" id="about">
+    <button class="exit-about" aria-label="Exit About Me">X</button>
     <div class="aboutMe">
       <div class="aboutPhotoContainer">
         <div class="aboutPhoto"></div>
