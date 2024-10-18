@@ -6,7 +6,7 @@
 }
 
 body {
-  overflow-x: hidden;
+  overflow-y: scroll;
   background-color: black;
 }
 
@@ -187,7 +187,7 @@ body {
   left: 10px;
   /* border: 2px solid #bbffff; */
   background-color: #004e52;
-  z-index: 14;
+  z-index: 25;
 }
 
 .availability-text-container {
@@ -252,7 +252,7 @@ body {
   height: 100vh;
   background-color: #202020cc;
   z-index: 15;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .about-me {
@@ -268,7 +268,7 @@ body {
   width: 30%;
   top: -250vh;
   background-color: #00000077;
-  /* overflow-x: hidden; */
+  overflow-y: scroll;
   z-index: 15;
 }
 
@@ -311,6 +311,7 @@ body {
   font-family: darkmode-mono-off, sans-serif;
   font-weight: 400;
   font-style: normal;
+  overflow-y: scroll;
 }
 
 .about-text {
@@ -346,30 +347,86 @@ body {
 /* #region Explore Section */
 .explore {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: end;
   width: 100vw;
   height: 100vh;
   background-color: #ff0000;
   z-index: 30;
-  overflow-x: scroll;
+  overflow-y: scroll;
   opacity: 0;
 }
 .exit-explore {
   z-index: 35;
 }
 
+.explore-projects {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  width: 100%;
+  height: 300vh;
+}
+
+.explore-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: #202020;
+  /* border: ; */
+}
+
+.explore-card-inner {
+  width: 75%;
+  /* height: 75%; */
+  aspect-ratio: 1/1;
+  background-color: #bbbbbb;
+  /* border: ; */
+}
+
 /* #endregion Explore Section */
+
+/* #region Reveal Section */
+
+  .nav2 {
+    position: absolute;
+    right: 2rem;
+    display: flex;
+    top: 30px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    width: 30%;
+    /* gap: 3rem; */
+  }
+
+  .nav-reveal-button {
+    display: flex;
+    /* position: absolute; */
+    background-color: #00000000;
+    color: white;
+    border: none;
+    padding: 1rem 0 2rem 1rem;
+    font-size: 2rem;
+    font-family: "myriad-pro", sans-serif, "Arial";
+    font-weight: 600;
+    font-style: normal;
+  }
+/* #endregion Reveal Section */
+
 /* #region Contact Section */
 .contact {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: end;
   width: 100vw;
   height: 100vh;
   background-color: #00ff00;
   z-index: 30;
-  overflow-x: scroll;
+  overflow-y: scroll;
   opacity: 0;
 }
 .exit-contact {
@@ -390,13 +447,12 @@ body {
     font-size: 5rem;
   }
 }
-
 /* ! Mobile + Tablet */
 @media only screen and (max-width: 650px) {
 
   body {
     height: 100vh;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     background-color: black;
   }
 
@@ -537,5 +593,21 @@ body {
 } */
 
 }
+
+@media only screen and (max-height: 300px) {
+  .nav {
+    top: -20px
+  }
+
+  .up-button {
+    bottom: -30px;
+  }
+
+  .name {
+    top: -20px;
+    font-size: 4rem;
+  }
+}
+
 /* #endregion Media Queries */
 

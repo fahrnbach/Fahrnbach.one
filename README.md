@@ -5,4 +5,6 @@ TODO Add Attributions
 TODO Sunrise Ocean Daymode
 
 TODO Debounce the Scroll Function
-TODO Fix Scroll Animation Trigger For About
+DONE Fix Scroll Animation Trigger For About
+TODO Nav on Screen Rotate?
+TODO Reveal Nav on Explore Tab?

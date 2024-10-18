@@ -326,9 +326,9 @@ function showAboutButton() {
   contactOpen = false
   gsap.to('.about', {opacity: 1, duration: 2})
   gsap.to('.about', {display: 'flex', duration: 2})
-  gsap.to('.contact', {display: 'none', duration: 2})
+  gsap.to('.contact', {display: 'none'})
   gsap.to('.contact', {opacity: 0, duration: 1})
-  gsap.to('.explore', {display: 'none', duration: 2})
+  gsap.to('.explore', {display: 'none'})
   gsap.to('.explore', {opacity: 0, duration: 1})
   nameAnimation();
   setTimeout(() => {
@@ -475,7 +475,7 @@ window.addEventListener('scroll', (e) => {
     // html.scroll(0, window.innerHeight * 2)
     gsap.to('.up-button-container', {display: 'none'})
     gsap.to('.up-button', {display: 'none'})
-    gsap.to(window, { duration: 1, scrollTo: { y: "#about"} });
+    gsap.to(window, { duration: 0, scrollTo: { y: "#about"} });
     gsap.to('.about-me', {y: '250vh', duration: 1})
     scrollPosition = html.scrollTop
   } 
