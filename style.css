@@ -452,7 +452,7 @@ body {
 
   body {
     height: 100vh;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     background-color: black;
   }
 
@@ -542,7 +542,7 @@ body {
 
 .mobile-continue-container {
   display: block;
-  position: absolute;
+  position: fixed;
   display: flex;
   top: 85dvh;
   align-content: center;
