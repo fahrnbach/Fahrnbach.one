@@ -52,7 +52,7 @@ body {
   padding: 4rem 8rem;;
   padding: 3.5rem clamp(2vw, 8rem, 10vw);
   justify-content: space-between;
-  z-index: 20;
+  z-index: 50;
   /* padding: 0; */
 }
 
@@ -63,13 +63,8 @@ body {
   display: flex;
   justify-content: end;
   gap: 4rem;
-  font-size: clamp(2vw, 2rem, 3vw);
-  font-family: "myriad-pro", sans-serif, "Arial";
-  font-weight: 600;
-  font-style: normal;
-  /* text-decoration: underline;
-  text-underline-offset: .5vw; */
 }
+
 /* #endRegion Navigation */
 
 /* #region Information */
@@ -109,7 +104,7 @@ body {
   padding-left: 25px;
   padding-bottom: 25px;
   pointer-events: none;
-  /* will-change: transform */
+  will-change: auto
 }
 
 .up-button-container {
@@ -161,11 +156,27 @@ body {
   font-size: 3rem;
   font-size: clamp(3vw, 3rem, 4vw);
 }
+
+.nav-button {
+  position: relative;
+  display: flex;
+  background-color: #00000000;
+  justify-content: end;
+  gap: 4rem;
+  
+  border: none;
+  color: white;
+  font-size: clamp(2vw, 2rem, 3vw);
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
+}
+
 /* #endRegion Navigation */
 
 /* #region Availability Badge */
 
-.availabilityBadge {
+.availability-badge {
   display: flex;
   position: fixed;
   align-content: center;
@@ -179,7 +190,7 @@ body {
   z-index: 14;
 }
 
-.availabilityTextContainer {
+.availability-text-container {
   color: #ddffff;
   font-size: 1rem;
   font-family: 'Courier New', Courier, monospace;
@@ -187,7 +198,7 @@ body {
   margin: 0 10px;
 }
 
-.availabilityDotContainer {
+.availability-dot-container {
   position: relative;
   display: flex;
   justify-self: end;
@@ -196,7 +207,7 @@ body {
   aspect-ratio: 1/1;
 }
 
-.availabilityDot {
+.availability-dot {
   position: relative; 
   display: flex;
   justify-self: end;
@@ -240,11 +251,11 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #202020cc;
-  z-index: 10;
+  z-index: 15;
   overflow-x: scroll;
 }
 
-.aboutMe {
+.about-me {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
@@ -257,9 +268,11 @@ body {
   width: 30%;
   top: -250vh;
   background-color: #00000077;
+  /* overflow-x: hidden; */
+  z-index: 15;
 }
 
-.aboutPhotoContainer {
+.about-photo-container {
   position: relative;
   display: flex;
   justify-content: center;
@@ -267,7 +280,7 @@ body {
   width: 100%
 }
 
-.aboutPhoto {
+.about-photo {
   position: relative;
   display: flex;
   align-self: flex-start;
@@ -280,14 +293,14 @@ body {
   border: 5px solid white;
 }
 
-.lineBreak {
+.line-break {
   font-family: "bagatela", serif;
   font-weight: 800;
   font-style: normal;
   color: wheat;
 }
 
-.aboutTextContainer {
+.about-text-container {
   position: relative;
   display: flex;
   align-self: flex-start;
@@ -300,15 +313,15 @@ body {
   font-style: normal;
 }
 
-.aboutText {
+.about-text {
   width: 90%;
 }
 
-.mobileContinueContainer {
+.mobile-continue-container {
   display: none;
 }
 
-.exit-about {
+.exit {
   width: 50px;
   position: absolute;
   height: 50px;
@@ -328,11 +341,42 @@ body {
   display: none;
 }
 
-.mobile-continue-container {
-  display: none;
+/* #endregion About Section */
+
+/* #region Explore Section */
+.explore {
+  position: absolute;
+  display: flex;
+  justify-content: end;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ff0000;
+  z-index: 30;
+  overflow-x: scroll;
+  opacity: 0;
+}
+.exit-explore {
+  z-index: 35;
 }
 
-/* #endregion About Section */
+/* #endregion Explore Section */
+/* #region Contact Section */
+.contact {
+  position: absolute;
+  display: flex;
+  justify-content: end;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00ff00;
+  z-index: 30;
+  overflow-x: scroll;
+  opacity: 0;
+}
+.exit-contact {
+  z-index: 45;
+}
+
+/* #endregion Contact Section */
 
 /* #region Media Queries */
 /* ! Fix for Scroll Indicator */
@@ -371,21 +415,33 @@ body {
     align-content: center;
     justify-content: end;
     width: 100%;
-    z-index: 10;
+    z-index: 12;
   }
 
   .nav ul {
-    top: 90px;
+    top: 80px;
     right: 0;
     flex-wrap: wrap;
     justify-content: end;
     justify-self: end;
     width: 25%;
     font-size: 1.5rem;
-    gap: 3rem;
-    z-index: 20;
+    gap: 0;
+    z-index: 13;
     /* display: none; */
 }
+
+  .nav-button {
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: end;
+    padding: 1rem 0 2rem 1rem;
+    font-size: clamp(5vw, 3rem, 6vw);
+    font-family: "myriad-pro", sans-serif, "Arial";
+    font-weight: 600;
+    font-style: normal;
+  }
 
   .info {
     display: flex;
@@ -417,7 +473,7 @@ body {
   transition: 1s opacity ease;
 } */
 
-.aboutMe { 
+.about-me { 
   position: absolute;
   /* top: 90vh; */
   /* height: 110vh; */

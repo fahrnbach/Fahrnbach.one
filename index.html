@@ -11,13 +11,13 @@
   </head>
   <body>
   <section class="lander" id="lander"></section>
-    <div class="availabilityBadge">
-      <div class="availabilityTextContainer">
+    <div class="availability-badge">
+      <div class="availability-text-container">
         Available
       </div>
-      <div class="availabilityDotContainer">
-        <div class="availabilityDot">
-          <div class="availabilityDotPulse"></div>
+      <div class="availability-dot-container">
+        <div class="availability-dot">
+          <div class="availability-dot-pulse"></div>
         </div>
       </div>
     </div>
@@ -37,9 +37,9 @@
     <button aria-label="Reload Button" class="reload"></button>
     <div class="nav">
       <ul>
-        <a class="explore-link">Explore</a>
-        <a class="about-link">About</a>
-        <a class="contact-link">Contact</a>
+        <button class="nav-button nav-explore-button">Explore</button>
+        <button class="nav-button nav-about-button">About</button>
+        <button class="nav-button nav-contact-button">Contact</button>
         <!-- <a class="shop-link">Shop</a> -->
       </ul>
     </div>
@@ -47,19 +47,34 @@
     <h1 class="info">Click + Drag</h1>
   </div>
   <section class="about" id="about">
-    <button class="exit-about" aria-label="Exit About Me">X</button>
-    <div class="aboutMe">
-      <div class="aboutPhotoContainer">
-        <div class="aboutPhoto"></div>
+    <button class="exit-about exit" aria-label="Exit About Me">X</button>
+    <div class="about-me">
+      <div class="about-photo-container">
+        <div class="about-photo"></div>
       </div>
-      <div class="lineBreak">-----------------------------------------</div>
-      <div class="aboutTextContainer">
-        <div class="aboutText">Hi, There Its Me!
-          ext ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      <div class="line-break">-----------------------------------------</div>
+      <div class="about-text-container">
+        <div class="about-text">Garrett is cool :) . Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a massa non mauris mattis lobortis. Morbi venenatis vulputate arcu, eget sollicitudin ante ultrices quis. Morbi pretium porta quam sed hendrerit. In hac habitasse platea dictumst. In mi tortor, blandit sed tellus eu, lacinia faucibus eros. Phasellus at dolor in magna pretium vestibulum eget a diam. Vivamus sagittis, nulla non tristique elementum, lorem massa scelerisque nisl, sed sollicitudin leo diam non risus. Nulla ac convallis tellus. Suspendisse ac nulla a neque fringilla auctor at sagittis erat. In vitae purus semper, porttitor elit in, pharetra ante. Donec lectus erat, fermentum eu erat in, accumsan porttitor mauris. In ac neque odio. Nunc nec finibus diam, ac malesuada tellus. In hac habitasse platea dictumst. In facilisis neque quis ex tempor, id vehicula velit convallis. Proin metus velit, maximus eget suscipit in, sagittis laoreet velit.
         </div>
       </div>
     </div>
-    <div class="aboutSection"></div>
+    <div class="about-section"></div>
+  </section>
+  <section class="explore" id="explore">
+    <button class="exit-explore exit" aria-label="Exit About Me">X</button>
+    <div class="explore-projects">
+      <div class="explore-gallery">
+        <div class="about-photo"></div>
+      </div>
+    </div>
+  </section>
+  <section class="contact" id="contact">
+    <button class="exit-contact exit" aria-label="Exit About Me">X</button>
+    <div class="contact-projects">
+      <div class="contact-gallery">
+        <div class="about-photo"></div>
+      </div>
+    </div>
   </section>
     <script type="module" src="/main.js"></script>
   </body>

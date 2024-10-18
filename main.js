@@ -33,6 +33,45 @@ window.onbeforeunload = function () {
 
 window.scrollTo(0, 0)
 
+const mobileBreakpoint = 650
+
+let pointerDown = false;
+let exiting = false;
+
+
+const about = document.querySelector('.about')
+const aboutMe = document.querySelector('.about-me')
+const html = document.querySelector('html')
+
+let aboutMeIsVisible = false
+let aboutIsVisible = false
+
+const options = {
+  threshold: .7,
+};
+
+const intersectionCallback = (entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      let elem = entry.target;
+      // console.log(entry)
+      
+      if (entry.intersectionRatio > 1) {
+        aboutMeIsVisible = true
+        aboutIsVisible = true
+      }
+    }
+    else {
+      aboutMeIsVisible = false
+      aboutIsVisible = false
+    }
+  });
+};
+
+const observer = new IntersectionObserver(intersectionCallback, options);
+observer.observe(aboutMe)
+observer.observe(about)
+
 let shouldRender = true
 
 let clock = new THREE.Clock(); // # THREE SMOKE
@@ -45,9 +84,6 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 }
-
-const about = document.querySelector('.about')
-const html = document.querySelector('html')
 
 // #region Smoke Init
 
@@ -97,6 +133,7 @@ for (let i = 0; i < 90; i++) { //Can Adjust Number (90)
 }
 
 // #endregion Smoke Init
+
 // #region Earth Init
 const earthTexture = new THREE.TextureLoader().load( "models/2k_earth_daymap.jpg" );
 const geometry = new THREE.SphereGeometry(3, 64, 64);
@@ -112,6 +149,7 @@ const earth = new THREE.Mesh(geometry, material);
 // Add earth to scene
 scene.add(earth);
 // #endregion Earth Init
+
 // #region Moon Init
 const moonTexture = new THREE.TextureLoader().load( "models/Moon_Texture_Map_Compact.jpg" );
 const moonGeometry = new THREE.SphereGeometry(.5, 64, 64);
@@ -134,6 +172,7 @@ moonObj.add(moon)
 scene.add(moonObj)
 moonObj.rotation.x = Math.PI / 7
 //#endregion Moon Init
+
 // #region Lights, Camera, Action
 //Let there be Light
 const light = new THREE.PointLight(0xffffff, 100, 100)
@@ -174,6 +213,7 @@ controls.autoRotate = true
 controls.autoRotateSpeed = 3
 
 //#endregion Lights, Camera, Action
+
 // #region Resize Function
 // Resize
 window.addEventListener('resize', () => {
@@ -190,6 +230,7 @@ window.addEventListener('resize', () => {
 })
 
 //  #endregion Resize Function
+
 // #region Renderer Loop
 const loop = () => {
   if (shouldRender) {
@@ -238,7 +279,109 @@ loop()
 //     }
 // }
 // #endregion Three Click Detection
+
 // #region Animation Magic
+//Init
+const name = document.querySelector('.name')
+let exploreOpen = false
+let aboutOpen = false
+let contactOpen = false
+
+let bottomDistance = (window.innerHeight - name.clientHeight) - 40
+
+let nameLocation = null
+function nameMoveToBottom() {
+  nameLocation = 'bottom'
+  gsap.to('.name', {y: bottomDistance - 1, backgroundColor: '#000000bb', height: '20vh', duration: 1});
+  // console.log('name at bottom')
+}
+function nameMoveToTop() {
+  nameLocation = 'top'
+  gsap.to('.name', {y: 0, backgroundColor: 'transparent', duration: 1});
+  // console.log('name at top')
+}
+function nameToTransparent() {
+  gsap.to('.name', {opacity: 0})
+  // console.log('nametotransparentfx')
+}
+function nameToOpaque() {
+  gsap.to('.name', {opacity: 1})
+  // console.log('nametoopaquefx')
+}
+
+
+function nameAnimation() {
+  nameToOpaque()
+    if (window.innerWidth <= mobileBreakpoint) {
+      nameMoveToBottom();
+      setTimeout(() => {
+      }, 2000);
+      nameToTransparent();
+    }
+}
+// --About
+function showAboutButton() {
+  aboutOpen = true
+  exploreOpen = false
+  contactOpen = false
+  gsap.to('.about', {opacity: 1, duration: 2})
+  gsap.to('.about', {display: 'flex', duration: 2})
+  gsap.to('.contact', {display: 'none', duration: 2})
+  gsap.to('.contact', {opacity: 0, duration: 1})
+  gsap.to('.explore', {display: 'none', duration: 2})
+  gsap.to('.explore', {opacity: 0, duration: 1})
+  nameAnimation();
+  setTimeout(() => {
+    gsap.to('.about-me', {overwrite: true, y: '250vh', duration: 1})
+    gsap.to(window, { overwrite: true, duration: 1, scrollTo: { y: "#about"} });
+  }, 100);
+}
+const navAboutButton = document.querySelector('.nav-about-button');
+navAboutButton.addEventListener('pointerup', () => {
+  showAboutButton()
+})
+// --Contact
+function showContactButton() {
+  contactOpen = true
+  exploreOpen = false
+  aboutOpen = false
+  gsap.to('.contact', {opacity: 1, duration: 2})
+  gsap.to('.contact', {display: 'flex', duration: 2})
+  gsap.to('.explore', {opacity: 0, duration: 1})
+  gsap.to('.about', {opacity: 0, duration: 1})
+  nameAnimation();
+  setTimeout(() => {
+    gsap.to('.about-me', {overwrite: true, y: '250vh', duration: 1})
+    gsap.to(window, { overwrite: true, duration: 1, scrollTo: { y: "#contact"} });
+  }, 200);
+}
+
+const navContactButton = document.querySelector('.nav-contact-button');
+navContactButton.addEventListener('pointerup', () => {
+  showContactButton()
+})
+// -- Explore
+function showExploreButton() {
+  exploreOpen = true
+  contactOpen = false
+  aboutOpen = false
+  gsap.to('.explore', {opacity: 1, duration: 2})
+  gsap.to('.explore', {display: 'flex', duration: 2})
+  gsap.to('.about', {opacity: 0, duration: 1})
+  gsap.to('.contact', {opacity: 0, duration: 1})
+  nameAnimation();  
+  setTimeout(() => {
+    gsap.to('.about-me', {overwrite: true, y: '250vh', duration: 1})
+    gsap.to(window, { overwrite: true, duration: 1, scrollTo: { y: "#explore"} });
+  }, 200);
+}
+
+const navExploreButton = document.querySelector('.nav-explore-button');
+navExploreButton.addEventListener('pointerup', () => {
+  showExploreButton()
+})
+
+
 // Timeline Magic
 // &Three Stuff
 const tl = gsap.timeline({defaults: { duration: 1}})
@@ -247,26 +390,28 @@ tl.fromTo(earth.scale, {z: 0, x: 0, y: 0}, {z: 1, x: 1, y: 1})
 tl.duration(1)
 
 // ^Nav Stuff
-tl.fromTo('.info', {opacity:'0'}, {opacity: '1'})
+if (pointerDown) {
+  tl.fromTo('.info', {opacity:'0'}, {opacity: '1'})
+}
 // !Detecting if device is desktop for nav pulldown animation
-if (window.innerWidth > 650) {
+if (window.innerWidth > mobileBreakpoint) {
   tl.fromTo('.nav', {y: '-150%'}, {y: '0%'})
 }
 
 // ^Mouse has clicked animations
-let pointerDown = false;
 let rgb = []
 let animationTriggered = false
 
 window.addEventListener('pointerdown', (e) => {
   pointerDown = true
   // console.log(e.target)
-  if (e.target != about){
-    gsap.to('.name', {opacity: 0})
+  // console.log(e.target != about)
+  if (e.target == canvas || e.target == mobileButton && pointerDown){
+    // nameToTransparent();
     gsap.to('.info', {opacity: 0})
   }
 // !Detecting if device is mobile/tablet for nav slide up animation
-    if (window.innerWidth <= 650 && !animationTriggered) {
+    if (window.innerWidth <= mobileBreakpoint && !animationTriggered) {
       tl.fromTo('.nav', {y: '0%'}, {y: '-225%'})
     }
     animationTriggered = true
@@ -289,28 +434,60 @@ window.addEventListener('pointermove', (e) => {
   }
 })
 // ^Nav Stuff
+// #region Scroll Animation
 let scrollPosition = 0
 let hasScrolled = false
-window.addEventListener('scroll', (e) => {
-  if (e.target == about) {
-    gsap.to('.name', {y: 0})
+
+let scrollDirection = null
+let prevScrollPoint = null
+
+let counter = 1
+
+function showAboutScroll() {
+  aboutOpen = true
+  if (exploreOpen || contactOpen) {
+    gsap.to('.explore', {opacity: 0, duration: 1})
+    gsap.to('.contact', {opacity: 0, duration: 1})
   }
-  gsap.to('.name', {opacity: 1})
-  if (html.scrollTop > window.innerHeight / 2 * 1.7 && scrollPosition < html.scrollTop) {
-    
+
+}
+
+window.addEventListener('scroll', (e) => {
+  scrollDirection = prevScrollPoint > html.scrollTop ? 'up' : 'down'
+  // console.log(scrollDirection)
+
+  if (nameLocation === 'bottom') {
+    // nameMoveToTop();
+    // nameToTransparent();
+  }
+  if (
+    html.scrollTop > window.innerHeight / 2 * 1.5 && 
+    scrollPosition <= html.scrollTop && 
+    !aboutMeIsVisible &&
+    !aboutIsVisible &&
+    !exploreOpen &&
+    !contactOpen
+    // &&scrollDirection === 'up'
+  ) {
+    gsap.to('.about', {opacity: 1, duration: 0})
+    showAboutScroll();
+    // console.log('scrollreveal')
     // html.scroll(0, window.innerHeight * 2)
-    gsap.to(window, { duration: .5, scrollTo: { y: "#about"} });
-    gsap.to('.aboutMe', {y: '250vh', duration: 1.5})
     gsap.to('.up-button-container', {display: 'none'})
     gsap.to('.up-button', {display: 'none'})
-    // hasScrolled = true
+    gsap.to(window, { duration: 1, scrollTo: { y: "#about"} });
+    gsap.to('.about-me', {y: '250vh', duration: 1})
     scrollPosition = html.scrollTop
+  } 
+  else if (exiting) {
+    gsap.to(window, {overwrite: true, duration: .5, scrollTo: { y: '#lander'} });
+    gsap.to('.about-me', {overwrite: true, y: '0', duration: .5})
   }
-  // if (html.scrollTop < window.innerHeight / 2 * 1.7) {
-  //   gsap.to('.aboutMe', {y: '-250vh'})
-  // }
+  prevScrollPoint = html.scrollTop
 })
 
+// #endregion Scroll Animation
+//Scroll Up Indicator Bounce Animation
 setTimeout(() => {
   const tl2 = gsap.timeline({defaults: { duration: 1}})
   if (html.scrollTop < window.innerHeight) {
@@ -338,20 +515,14 @@ mobileButton.addEventListener('pointerdown', () => {
   })
 })
 
-
-const name = document.querySelector('.name')
-let bottomDistance = (window.innerHeight - name.clientHeight) - 40
-
 mobileButton.addEventListener('pointerup', () => {
   gsap.to('.mobile-continue-button',{
     backgroundColor: '#202020bb',
     border: 'inherit',
     outline: '2px solid white'
   })
-    gsap.to('.name', {y: bottomDistance - 1, backgroundColor: '#000000bb', height: '20vh', duration: 1});
-    setTimeout(() => {
-      gsap.to(window, { duration: 1, scrollTo: { y: "#about"} });
-    }, 10);
+  // nameToOpaque();
+  showAboutButton();
     // !Name-Animation on Entry
 })
 
@@ -362,10 +533,69 @@ upButton.addEventListener('pointerup', () => {
 
 const exitAbout = document.querySelector('.exit-about');
 exitAbout.addEventListener('pointerup', () => {
-  gsap.to(window, { duration: 1, scrollTo: { y: "#lander"} });
+  aboutOpen = false
+  gsap.to('.about', {opacity: 1})
   // !Name-Animation on Exit
-  gsap.to('.name', {y: 0, backgroundColor: 'transparent', duration: 1});
+  exiting = true
+  setTimeout(() => {
+    nameMoveToTop();
+  }, 100);
+  setTimeout(() => {
+    nameToOpaque();
+  }, 500);
+  gsap.to(window, {duration: .5, scrollTo: { y: "#lander"} });
+  gsap.to('.about-me', {y: '0', duration: .5})
+  // nameMoveToTop();
+  setTimeout(() => {
+    exiting = false
+  }, 1050);
 })
+
+const exitExplore = document.querySelector('.exit-explore');
+exitExplore.addEventListener('pointerup', () => {
+  exploreOpen = false
+  gsap.to('.about', {opacity: 1})
+  // console.log('exit-explore')
+  gsap.to('.explore', {display: 'none', duration: 1})
+  gsap.to('.explore', {opacity: 0, duration: 1})
+  // !Name-Animation on Exit
+  exiting = true
+  setTimeout(() => {
+    nameMoveToTop();
+  }, 100);
+  setTimeout(() => {
+    nameToOpaque();
+  }, 500);
+  gsap.to(window, {duration: .5, scrollTo: { y: "#lander"} });
+  gsap.to('.explore', {y: '0', duration: .5})
+  setTimeout(() => {
+    exiting = false
+  }, 1050);
+})
+
+const exitContact = document.querySelector('.exit-contact');
+exitContact.addEventListener('pointerup', () => {
+  contactOpen = false
+  gsap.to('.about', {opacity: 1})
+  // console.log('exit-contact')
+  gsap.to('.contact', {display: 'none', duration: 1})
+  gsap.to('.contact', {opacity: 0, duration: 1})
+  // !Name-Animation on Exit
+  exiting = true
+  setTimeout(() => {
+    nameMoveToTop();
+  }, 100);
+  setTimeout(() => {
+    nameToOpaque();
+  }, 500);
+  gsap.to(window, {duration: .5, scrollTo: { y: "#lander"} });
+  gsap.to('.contact', {y: '0', duration: .5})
+  setTimeout(() => {
+    exiting = false
+  }, 1050);
+})
+
+
 
 // #endregion Animation Magic
 
