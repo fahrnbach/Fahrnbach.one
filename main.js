@@ -672,45 +672,6 @@ reloadButton.addEventListener('pointerup', () => {
 
 // #region SVG Animation
 
-// const starSegment = document.createElement('path');
-// make a simple rectangle
-// starSegment.style.fill = 'none'
-// starSegment.style.stroke = 'blue';
-// !Function requires an anchor path to be added to the original svg html
-function drawStarFx(anchorPathClass, numberOfSegments, svgPath, drawTime) {
-  const initialSegment = document.querySelector(`.${anchorPathClass}`)
-  let segmentRotate = 0
-  console.log('called')
-  for(let i=0; i <= numberOfSegments; i++) {
-    let starSegment = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    console.log(segmentRotate)
-    starSegment.classList.add('contact-star')
-    starSegment.style.transform = `rotate(${segmentRotate}deg)`
-    starSegment.style.transformOrigin = 'center'
-    // starSegment.setAttribute('d', 'M151.1,347.32c7.21-110.1,102.13-193.36,212.23-186.15')
-    starSegment.setAttribute('d', svgPath)
-    segmentRotate += 360/numberOfSegments
-    initialSegment.insertAdjacentElement('beforebegin', starSegment);
-    var length = starSegment.getTotalLength();
-    // Clear any previous transition
-    starSegment.style.transition = starSegment.style.WebkitTransition = 'none';
-    // Set up the starting positions
-    starSegment.style.strokeDasharray = length + ' ' + length;
-    starSegment.style.strokeDashoffset = length;
-    // Trigger a layout so styles are calculated & the browser
-    // picks up the starting position before animating
-    starSegment.getBoundingClientRect();
-    // Define our transition
-    starSegment.style.transition = starSegment.style.WebkitTransition =
-      `stroke-dashoffset ${drawTime}s ease-in-out`;
-    // Go!
-    
-    setTimeout(() => {
-      starSegment.style.strokeDashoffset = '0';
-    }, 5000);
-  }
-}
-
 // #region SVGDrawStarModule
 
 class SVGStarComponent {
