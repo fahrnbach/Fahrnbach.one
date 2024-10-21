@@ -1,7 +1,9 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import gsap from 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
+import { mx_bilerp_0 } from 'three/src/nodes/materialx/lib/mx_noise.js';
+// import { rotate } from 'three/webgpu';
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -135,7 +137,7 @@ for (let i = 0; i < 90; i++) { //Can Adjust Number (90)
 // #endregion Smoke Init
 
 // #region Earth Init
-const earthTexture = new THREE.TextureLoader().load( "models/2k_earth_daymap.jpg" );
+const earthTexture = new THREE.TextureLoader().load( "models/2k_earth_daymap.webp" );
 const geometry = new THREE.SphereGeometry(3, 64, 64);
 // !The Color
 const material = new THREE.MeshStandardMaterial({
@@ -309,6 +311,14 @@ function nameToOpaque() {
   // console.log('nametoopaquefx')
 }
 
+function infoClickToTransparent() {
+  if (pointerDown) {
+    setTimeout(() => {
+      tl.to('.info', {opacity: '0'})
+    }, 50);
+  }
+}
+
 
 function nameAnimation() {
   nameToOpaque()
@@ -354,6 +364,13 @@ function showContactButton() {
     gsap.to('.about-me', {overwrite: true, y: '250vh', duration: 1})
     gsap.to(window, { overwrite: true, duration: 1, scrollTo: { y: "#contact"} });
   }, 200);
+// let parentClass = 'contact-star-animation-container'
+// let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
+// let starSegments = 15
+// let drawTime = 2.5
+// let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '10px'}, {opacity: 0.5}]
+
+drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
 }
 
 const navContactButton = document.querySelector('.nav-contact-button');
@@ -390,9 +407,9 @@ tl.fromTo(earth.scale, {z: 0, x: 0, y: 0}, {z: 1, x: 1, y: 1})
 tl.duration(1)
 
 // ^Nav Stuff
-if (pointerDown) {
-  tl.fromTo('.info', {opacity:'0'}, {opacity: '1'})
-}
+// if (pointerDown) {
+//   tl.fromTo('.info', {opacity:'0'}, {opacity: '1'})
+// }
 // !Detecting if device is desktop for nav pulldown animation
 if (window.innerWidth > mobileBreakpoint) {
   tl.fromTo('.nav', {y: '-150%'}, {y: '0%'})
@@ -406,9 +423,14 @@ window.addEventListener('pointerdown', (e) => {
   pointerDown = true
   // console.log(e.target)
   // console.log(e.target != about)
-  if (e.target == canvas || e.target == mobileButton && pointerDown){
-    // nameToTransparent();
+  if (e.target == canvas) {
     gsap.to('.info', {opacity: 0})
+  }
+  if (e.target == mobileButton || 
+    e.target == navAboutButton || e.target == navContactButton || 
+    e.target == navExploreButton && pointerDown){
+    // nameToTransparent();
+    infoClickToTransparent();
   }
 // !Detecting if device is mobile/tablet for nav slide up animation
     if (window.innerWidth <= mobileBreakpoint && !animationTriggered) {
@@ -470,6 +492,7 @@ window.addEventListener('scroll', (e) => {
     // &&scrollDirection === 'up'
   ) {
     gsap.to('.about', {opacity: 1, duration: 0})
+    gsap.to('.info', {opacity: 0})
     showAboutScroll();
     // console.log('scrollreveal')
     // html.scroll(0, window.innerHeight * 2)
@@ -593,7 +616,47 @@ exitContact.addEventListener('pointerup', () => {
   setTimeout(() => {
     exiting = false
   }, 1050);
+  drawStarFxParent('contact-star-animation-container',0,0,0,0,0, true)
+  console.log('exiting')
 })
+
+//#region Explore Stars
+// We Are Go For Launch
+const exploreBG = document.querySelector('.explore-background')
+for (let i=0; i < 400; i++) {
+  var star = document.createElement('div')
+  
+  star.classList.add('star')
+  
+  let size = Math.random() * 2.5 + 1
+  star.style.bottom = Math.random() * html.scrollHeight / 2 + 'px'
+  star.style.left = Math.random() * html.scrollWidth + 'px'
+  star.style.width = size + 'px'
+  star.style.height = size + 'px'
+  
+  let delay = Math.random() * 3
+  star.style.animationDelay = delay + 's'
+  
+  exploreBG.appendChild(star)
+}
+
+for (let i=0; i < 100; i++) {
+  var star = document.createElement('div')
+  
+  star.classList.add('star-animated')
+  
+  let size = Math.random() * 2.5 + 1
+  star.style.bottom = Math.random() * html.scrollHeight / 2 + 'px'
+  star.style.left = Math.random() * html.scrollWidth + 'px'
+  star.style.width = size + 'px'
+  star.style.height = size + 'px'
+  
+  let delay = Math.random() * 3
+  star.style.animationDelay = delay + 's'
+  
+  exploreBG.appendChild(star)
+}
+//#endregion Explore Stars
 
 
 
@@ -607,3 +670,352 @@ reloadButton.addEventListener('pointerup', () => {
 
 //#endregion Nav
 
+// #region SVG Animation
+
+// const starSegment = document.createElement('path');
+// make a simple rectangle
+// starSegment.style.fill = 'none'
+// starSegment.style.stroke = 'blue';
+// !Function requires an anchor path to be added to the original svg html
+function drawStarFx(anchorPathClass, numberOfSegments, svgPath, drawTime) {
+  const initialSegment = document.querySelector(`.${anchorPathClass}`)
+  let segmentRotate = 0
+  console.log('called')
+  for(let i=0; i <= numberOfSegments; i++) {
+    let starSegment = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    console.log(segmentRotate)
+    starSegment.classList.add('contact-star')
+    starSegment.style.transform = `rotate(${segmentRotate}deg)`
+    starSegment.style.transformOrigin = 'center'
+    // starSegment.setAttribute('d', 'M151.1,347.32c7.21-110.1,102.13-193.36,212.23-186.15')
+    starSegment.setAttribute('d', svgPath)
+    segmentRotate += 360/numberOfSegments
+    initialSegment.insertAdjacentElement('beforebegin', starSegment);
+    var length = starSegment.getTotalLength();
+    // Clear any previous transition
+    starSegment.style.transition = starSegment.style.WebkitTransition = 'none';
+    // Set up the starting positions
+    starSegment.style.strokeDasharray = length + ' ' + length;
+    starSegment.style.strokeDashoffset = length;
+    // Trigger a layout so styles are calculated & the browser
+    // picks up the starting position before animating
+    starSegment.getBoundingClientRect();
+    // Define our transition
+    starSegment.style.transition = starSegment.style.WebkitTransition =
+      `stroke-dashoffset ${drawTime}s ease-in-out`;
+    // Go!
+    
+    setTimeout(() => {
+      starSegment.style.strokeDashoffset = '0';
+    }, 5000);
+  }
+}
+
+// #region SVGDrawStarModule
+
+// let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
+// let starSegments = 15
+// let drawTime = 2.5
+// let anchorPathClass = 'contact-star-1'
+
+// drawStarFx(seedPathClass, starSegments, starPath, drawTime);
+// undrawStarFX();
+
+// !refactor into oop
+function drawStarFxParent(parentClass, numberOfSegments, svgPath, drawTime, providedStyles, rotate = 0, shouldExit = false) {
+  // let exit = shouldExit
+  // const parentDiv = document.querySelector(`.${parentClass}`)
+    // let rotationLoop = setInterval(rotationHandler, 10)
+    // let parentRotation = 0
+  // console.log(exit + 'Exit Val')
+  // function undrawStarFX(rm = false) {
+  //   const svgEl= document.querySelector('.drawStarFXSVG')
+  //   const starSegments = document.querySelectorAll('.line1')
+  //   const parentEl = svgEl.parentElement
+  //   starSegments.forEach((el) => {
+  //     let length = el.getTotalLength();
+  //     setTimeout(() => {
+  //       el.style.strokeDashoffset = length;
+  //     }, 0);
+  //     setTimeout(() => {
+  //       console.log(rm)
+  //       if (rm) {
+  //         console.log(parentEl)
+  //         while (svgEl.firstChild) {
+  //           svgEl.removeChild(svgEl.lastChild);
+  //         }
+  //         svgEl.remove();
+  //         // rotationAnimationLoop(0)
+  //         parentDiv.removeAttribute('style');
+  //         clearInterval(rotationLoop)
+  //       }
+  //     }, 2);
+  //   })
+  // }
+    // function rotationHandler() {
+    //       console.log(exit +'exit?')
+    //       if (!exit) {
+    //         if (parentRotation >= 360) {
+    //           parentRotation = 0
+    //         }
+    //         parentDiv.style.transform = `rotate(${parentRotation}deg)`
+    //         parentRotation+= rotate / 100 * Math.PI * 2
+    //       }
+    //       if (exit) {
+    //         console.log('reset')
+    //         undrawStarFX(true)
+    //         return
+    //         }
+    //     }
+
+  //init
+  // let defaultStyles = [{fill: 'none'}, {stroke: '#231f20'}, {strokeMiterLimit: 10}, {strokeWidth: '5px'}, {opacity: .5}]
+  // let defaultHeight = 500
+  // let defaultWidth = 500
+
+  // if (providedStyles) {defaultStyles = providedStyles}
+
+  // !getBoundingClientRect returns zero if the div display is set to none
+  // let parentDivBounds = parentDiv.getBoundingClientRect()
+  // let parentDivHeight = parentDivBounds.height
+  // let parentDivWidth = parentDivBounds.width
+  // if (parentDivHeight == 0) {parentDivHeight = defaultHeight}
+  // if (parentDivWidth == 0) {parentDivWidth = defaultWidth}
+  //add svg frame template
+  // <svg class="contact-star-animation-container" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500">
+  // let svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  // svgContainer.classList.add('drawStarFXSVG')
+  // svgContainer.setAttribute('xmlns',"http://www.w3.org/2000/svg")
+  // svgContainer.setAttribute('version',"1.1")
+  // svgContainer.setAttribute('viewBox',`0 0 ${parentDivHeight} ${parentDivWidth}`)
+  // let defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+  // svgContainer.appendChild(defs)
+  // let style = document.createElementNS("http://www.w3.org/2000/svg", "stye");
+  // set Default style
+  // defs.appendChild(style)
+  // let g1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  // svgContainer.appendChild(g1)
+  // let g2 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  // g2.id = 'Layer_1'
+  // g1.appendChild(g2)
+  // let g3 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  // g2.appendChild(g3)
+  // parentDiv.appendChild(svgContainer)
+  //add children
+  // let segmentRotate = 0
+  // console.log('called')
+  // for(let i=0; i < numberOfSegments; i++) {
+    // apply styles styles
+  //   let starSegment = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  //   defaultStyles.forEach((style) => {
+  //     for (const key in style) {
+  //       // console.log(key)
+  //       starSegment.style[key] = style[key]
+  //     }
+  //   })
+  //   // console.log(segmentRotate) 
+  //   starSegment.style.transform = `rotate(${segmentRotate}deg)`
+  //   segmentRotate += 360/numberOfSegments
+  //   starSegment.style.transformOrigin = 'center'
+  //   // starSegment.setAttribute('d', 'M151.1,347.32c7.21-110.1,102.13-193.36,212.23-186.15')
+  //   // add class for future identification
+  //   starSegment.classList.add('line1')
+  //   starSegment.setAttribute('d', svgPath)
+  //   g3.appendChild(starSegment);
+  //   var length = starSegment.getTotalLength();
+  //   // Clear any previous transition
+  //   starSegment.style.transition = starSegment.style.WebkitTransition = 'none';
+  //   // Set up the starting positions
+  //   starSegment.style.strokeDasharray = length + ' ' + length;
+  //   starSegment.style.strokeDashoffset = length;
+  //   // Trigger a layout so styles are calculated & the browser
+  //   // picks up the starting position before animating
+  //   starSegment.getBoundingClientRect();
+  //   // Define our transition
+  //   starSegment.style.transition = starSegment.style.WebkitTransition =
+  //     `stroke-dashoffset ${drawTime}s ease-in-out`;
+  //   // Go!
+    
+  //   setTimeout(() => {
+  //     starSegment.style.strokeDashoffset = '0';
+  //   }, drawTime * 1000);
+  // }
+    // console.log(parentRotation)
+        // rotationLoop()
+}
+// rotationAnimationLoop
+
+
+class SVGStarComponent {
+  constructor(parentClass, numberOfSegments, svgPath, drawTime, providedStyles, rotationSpeed = 1) {
+    this.parentClass = parentClass;
+    this.numberOfSegments = numberOfSegments;
+    this.svgPath = svgPath;
+    this.drawTime = drawTime;
+    this.providedStyles = providedStyles;
+    this.rotationSpeed = rotationSpeed;
+    this.parentDiv = document.querySelector(`.${this.parentClass}`);
+    this.defaultStyles = [{fill: 'none'}, {stroke: '#231f20'}, {strokeMiterLimit: 10}, {strokeWidth: '5px'}, {opacity: .5}];
+    this.defaultHeight = 500;
+    this.defaultWidth = 500;
+    this.parentRotation = 0
+    // !getBoundingClientRect returns zero if the div display is set to none
+  }
+  
+  drawStar() {
+    // console.dir(this.parentClass + 'PC')
+    // let parentDiv = document.querySelector(`.${this.parentClass}`)
+    // console.log(parentDiv)
+    this.parentDivBounds = this.parentDiv.getBoundingClientRect();
+    this.parentDivHeight = this.parentDivBounds.height
+    this.parentDivWidth = this.parentDivBounds.width
+    if (this.parentDivHeight == 0) {this.parentDivHeight = this.defaultHeight}
+    if (this.parentDivWidth == 0) {this.parentDivWidth = this.defaultWidth}
+    if (this.providedStyles) {this.defaultStyles = this.providedStyles}
+    // this.svgNodeCreate()  
+    let svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgContainer.classList.add('drawStarFXSVG') //!
+    svgContainer.setAttribute('xmlns',"http://www.w3.org/2000/svg")
+    svgContainer.setAttribute('version',"1.1")
+    svgContainer.setAttribute('viewBox',`0 0 ${this.parentDivHeight} ${this.parentDivWidth}`)
+    let defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    svgContainer.appendChild(defs)
+    let style = document.createElementNS("http://www.w3.org/2000/svg", "stye");
+    // set Default style
+    // const node = document.createTextNode('line1{fill: none; stroke: #231f20; stroke-miterlimit: 10; stroke-width: 5px;}')
+    // style.appendChild(node);
+    defs.appendChild(style)
+    let g1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    svgContainer.appendChild(g1)
+    let g2 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g2.id = 'Layer_1'
+    g1.appendChild(g2)
+    let g3 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g2.appendChild(g3)
+    this.parentDiv.appendChild(svgContainer)
+    // this.pathDraw()
+    let segmentRotate = 0
+  // console.log('called')
+  for(let i=0; i < this.numberOfSegments; i++) {
+    // apply styles styles
+    let starSegment = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    this.defaultStyles.forEach((style) => {
+      for (const key in style) {
+        // console.log(key)
+        starSegment.style[key] = style[key]
+      }
+    })
+    // console.log(segmentRotate) 
+    starSegment.style.transform = `rotate(${segmentRotate}deg)`
+    segmentRotate += 360/this.numberOfSegments
+    starSegment.style.transformOrigin = 'center'
+    // starSegment.setAttribute('d', 'M151.1,347.32c7.21-110.1,102.13-193.36,212.23-186.15')
+    // add class for future identification
+    starSegment.classList.add('line1')
+    starSegment.setAttribute('d', this.svgPath)
+    g3.appendChild(starSegment);
+    var length = starSegment.getTotalLength();
+    // Clear any previous transition
+    starSegment.style.transition = starSegment.style.WebkitTransition = 'none';
+    // Set up the starting positions
+    starSegment.style.strokeDasharray = length + ' ' + length;
+    starSegment.style.strokeDashoffset = length;
+    // Trigger a layout so styles are calculated & the browser
+    // picks up the starting position before animating
+    starSegment.getBoundingClientRect();
+    // Define our transition
+    starSegment.style.transition = starSegment.style.WebkitTransition =
+      `stroke-dashoffset ${this.drawTime}s ease-in-out`;
+    // Go!
+    
+    setTimeout(() => {
+      starSegment.style.strokeDashoffset = '0';
+    }, this.drawTime * 1000);
+  }
+  // rotationHandler() {
+    // this.parentRotation = 0;
+    this.rotating = setInterval(() => {
+      if (!this.shouldExit) {
+        // console.log('in rotating handler')
+        // console.log(this.parentRotation)
+        if (this.parentRotation >= 360) {
+          this.parentRotation = 0
+        }
+        this.parentDiv.style.transform = `rotate(${this.parentRotation}deg)`
+        // console.log(this.rotationSpeed)
+        this.parentRotation+= this.rotationSpeed / 100 * Math.PI * 2
+
+      }
+      // if (contact.shouldExit) {
+      //   console.log(this.parentDiv + 'PD')
+      //   console.log('reset')
+      //   // clearInterval(this.rotating)
+      //   return
+      //   }
+    }, 2);
+    // this.rotating = rotating
+  // }
+}
+
+
+  undrawStar() {
+    setTimeout(() => {
+      
+      clearInterval(this.rotating)
+      const svgEl= document.querySelector('.drawStarFXSVG')
+      const starSegments = document.querySelectorAll('.line1')
+      const parentEl = svgEl.parentElement
+      starSegments.forEach((el) => {
+        let length = el.getTotalLength();
+        setTimeout(() => {
+          el.style.strokeDashoffset = length;
+        }, 0);
+          setTimeout(() => {
+                // console.log(parentEl)
+                while (svgEl.firstChild) {
+                    svgEl.removeChild(svgEl.lastChild);
+                  }
+                  svgEl.remove();
+                  parentEl.removeAttribute('style');
+              }, 10000);
+          })
+        }, 10000);
+  }
+
+  // rotationHandler() {
+  //   console.log(exit +'exit?')
+  //   if (!exit) {
+  //     if (parentRotation >= 360) {
+  //       parentRotation = 0
+  //     }
+  //     parentDiv.style.transform = `rotate(${parentRotation}deg)`
+  //     parentRotation+= rotate / 100 * Math.PI * 2
+  //   }
+  //   if (exit) {
+  //     console.log('reset')
+  //     undrawStarFX(true)
+  //     return
+  //     }
+  // }
+}
+let parentClass = 'contact-star-animation-container'
+let starSegments = 15
+let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
+let drawTime = 5
+let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '10px'}, {opacity: 0.5}]
+let starComponent = new SVGStarComponent(parentClass, starSegments, starPath, drawTime, starStyles, 1)
+starComponent.drawStar()
+// console.log(contact)
+starComponent.undrawStar()
+
+
+
+// drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5);
+// undrawStarFX();
+
+// #endregion SVGDrawStarModule
+
+
+
+
+// #endRegion SVG Animation

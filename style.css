@@ -10,6 +10,8 @@ body {
   background-color: black;
 }
 
+svg{ overflow : visible ; }
+
 .lander {
   width: 100vw;
   height: 100vh;
@@ -348,14 +350,61 @@ body {
 .explore {
   position: absolute;
   display: none;
-  justify-content: end;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: #ff0000;
+  /* background-color: #000000; */
   z-index: 30;
   overflow-y: scroll;
+  overflow-x: hidden;
   opacity: 0;
 }
+
+.explore-background {
+  display: block;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000bb;
+  z-index: 29;
+}
+
+.explore-content-container {
+  position: absolute;
+  display: flex;
+  justify-content: center ;
+  top: 0;
+  width: 100dvw;
+  height: 100vh;
+  overflow: clip;
+  /* pointer-events: none; */
+}
+
+.explore-content {
+    position: absolute;
+    display: flex;
+    /* justify-content: end; */
+    /* align-self: center; */
+    /* justify-self: center; */
+    margin: auto auto;
+    width: 80vw;
+    height: 100vh;
+    background-color: #00000000;
+    z-index: 31;
+    overflow-y: scroll;
+    overflow-x: clip;
+    opacity: 1;
+    perspective: 5;
+    perspective-origin: bottom;
+    transform: perspective(500px) rotate3d(1, 0, 0, 30deg);
+    -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, 
+    from(#00000000), to(#000000ff));
+  mask-image: -webkit-gradient(linear, left top, left bottom, 
+    from(#00000000), to(#000000ff));
+}
+
 .exit-explore {
   z-index: 35;
 }
@@ -387,7 +436,101 @@ body {
   /* border: ; */
 }
 
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background-color: white;
+  /* animation: twinkle linear infinite 2s; */
+  z-index: 50;
+}
+
+.star-animated {
+  position: absolute;
+  border-radius: 50%;
+  background-color: white;
+  animation: twinkle linear infinite 2s;
+  z-index: 50;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.1;}
+  50% { opacity: 1;}
+  100% { opacity: 0.1;}
+}
+
 /* #endregion Explore Section */
+
+/* #region Contact Section */
+.contact {
+  position: absolute;
+  display: none;
+  justify-content: end;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+  /* background-color: #00ff00; */
+  z-index: 30;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  opacity: 0;
+}
+.exit-contact {
+  z-index: 45;
+}
+
+.contact-background {
+  display: block;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0000bb33;
+  z-index: 40;
+}
+
+.contact-content {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 100dvh;
+  z-index: 40;
+  /* background-color: #000000; */
+}
+
+.contact-star-animation-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  height: 50%;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+}
+
+.contact-star {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  stroke: #231f20;
+  stroke-width: 4.3
+}
+
+.contact-star-1 {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  stroke: #231f20;
+  stroke-width: 4.3;
+  /* transform: rotate(30deg); */
+}
+
+.star-1 {
+  /* transform: rotate(3deg); */
+  transform-origin: center;
+}
+/* #endregion Contact Section */
 
 /* #region Reveal Section */
 
@@ -417,24 +560,6 @@ body {
   }
 /* #endregion Reveal Section */
 
-/* #region Contact Section */
-.contact {
-  position: absolute;
-  display: none;
-  justify-content: end;
-  width: 100vw;
-  height: 100vh;
-  background-color: #00ff00;
-  z-index: 30;
-  overflow-y: scroll;
-  opacity: 0;
-}
-.exit-contact {
-  z-index: 45;
-}
-
-/* #endregion Contact Section */
-
 /* #region Media Queries */
 /* ! Fix for Scroll Indicator */
 
@@ -449,6 +574,10 @@ body {
 }
 /* ! Mobile + Tablet */
 @media only screen and (max-width: 650px) {
+
+  html {
+    overflow: hidden;
+  }
 
   body {
     height: 100vh;
@@ -529,10 +658,17 @@ body {
   transition: 1s opacity ease;
 } */
 
+.about {
+  /* position: fixed; */
+  height: 100dvh;
+  /* overflow-x: clip; */
+}
+
 .about-me { 
   position: absolute;
   /* top: 90vh; */
-  /* height: 110vh; */
+  height: 250vh;
+  overflow-x: scroll;
   width: 100vw;
 }
 
