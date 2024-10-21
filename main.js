@@ -687,10 +687,10 @@ class SVGStarComponent {
     this.defaultHeight = 500;
     this.defaultWidth = 500;
     this.parentRotation = 0
-    // !getBoundingClientRect returns zero if the div display is set to none
   }
   
   drawStar() {
+    // !getBoundingClientRect returns zero if the div display is set to none
     this.parentDivBounds = this.parentDiv.getBoundingClientRect();
     this.parentDivHeight = this.parentDivBounds.height
     this.parentDivWidth = this.parentDivBounds.width
@@ -749,14 +749,11 @@ class SVGStarComponent {
     }, this.drawTime * 1000);
   }
     this.rotating = setInterval(() => {
-      if (!this.shouldExit) {
         if (this.parentRotation >= 360) {
           this.parentRotation = 0
         }
         this.parentDiv.style.transform = `rotate(${this.parentRotation}deg)`
         this.parentRotation+= this.rotationSpeed / 100 * Math.PI * 2
-
-      }
     }, 2);
 }
 
