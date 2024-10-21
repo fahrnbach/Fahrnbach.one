@@ -691,17 +691,17 @@ class SVGStarComponent {
   
   drawStar() {
     // !getBoundingClientRect returns zero if the div display is set to none
-    this.parentDivBounds = this.parentDiv.getBoundingClientRect();
-    this.parentDivHeight = this.parentDivBounds.height
-    this.parentDivWidth = this.parentDivBounds.width
-    if (this.parentDivHeight == 0) {this.parentDivHeight = this.defaultHeight}
-    if (this.parentDivWidth == 0) {this.parentDivWidth = this.defaultWidth}
+    // this.parentDivBounds = this.parentDiv.getBoundingClientRect();
+    // this.parentDivHeight = this.parentDivBounds.height
+    // this.parentDivWidth = this.parentDivBounds.width
+    // if (this.parentDivHeight == 0) {this.parentDivHeight = this.defaultHeight}
+    // if (this.parentDivWidth == 0) {this.parentDivWidth = this.defaultWidth}
     if (this.providedStyles) {this.defaultStyles = this.providedStyles}
     let svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svgContainer.classList.add('drawStarFXSVG') //!
     svgContainer.setAttribute('xmlns',"http://www.w3.org/2000/svg")
     svgContainer.setAttribute('version',"1.1")
-    svgContainer.setAttribute('viewBox',`0 0 ${this.parentDivHeight} ${this.parentDivWidth}`)
+    svgContainer.setAttribute('viewBox',`0 0 ${this.defaultWidth} ${this.defaultHeight}`)
     let defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     svgContainer.appendChild(defs)
     let style = document.createElementNS("http://www.w3.org/2000/svg", "stye");
