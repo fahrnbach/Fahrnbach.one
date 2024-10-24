@@ -1,22 +1,81 @@
+let initalWindow = {
+  height: window.innerHeight,
+  width: window.innerWidth
+}
+
 let showcaseContent = document.querySelector('.showcase-content');
 let html = document.querySelector('html')
 
-for (let i = 0; i < 200; i++) {
-    let div = document.createElement('div')
-    let rect = showcaseContent.getBoundingClientRect()
-    console.log(rect.width)
-    div.style.width = rect.height / 4 + 'px'
-    div.style.height = rect.height / 4 + 'px'
-    div.style.aspectRatio = '1/1'
-    div.style.border = '1px solid black'
-    div.style.display = 'flex'
-    div.style.alignContent = 'center'
-    div.style.justifyContent = 'center'
-    // div.style.position = 'absolute'
-    div.style.backgroundColor = `rgb(${Math.random() * 100}% ${Math.random() * 100}% ${Math.random() * 100}%)`
-    div.classList.add(`showcase-${i}`)
-    showcaseContent.appendChild(div)
+let initialRect = showcaseContent.getBoundingClientRect()
+let initialSquaresToRender= (Math.round(initialRect.width / initialRect.height) * 4 * 4)
+
+let rect = showcaseContent.getBoundingClientRect()
+let squaresToRender = (Math.round(rect.width / rect.height * 4 * 4))
+
+window.addEventListener('resize', () => {
+  // renderSquaresAgain()
+  console.log(squaresToRender)
+  rect = showcaseContent.getBoundingClientRect()
+  if (initialSquaresToRender == squaresToRender){
+    squaresToRender = (Math.round(rect.width / rect.height * 4 * 4))
+  } else {
+    squaresToRender = initialSquaresToRender - squaresToRender
+  }
+  renderSquares()
+  addArt()
+})
+
+function renderSquares() {
+  for (let i = 0; i < squaresToRender; i++) {
+      let div = document.createElement('div')
+      div.style.width = rect.height / 4 + 'px'
+      // div.style.width = '25%'
+      div.style.height = rect.height / 4 + 'px'
+      // div.style.height = '25%'
+      // div.style.aspectRatio = '1/1'
+      div.style.border = '1px solid black'
+      div.style.display = 'flex'
+      div.style.alignContent = 'center'
+      div.style.justifyContent = 'center'
+      // div.style.position = 'absolute'
+      div.style.backgroundColor = `rgb(${Math.random() * 100}% ${Math.random() * 100}% ${Math.random() * 100}%)`
+      div.classList.add(`showcase-${i}`)
+      div.classList.add(`showcase-added`)
+      showcaseContent.appendChild(div)
+  }
 }
+
+function renderSquaresAgain() {
+  let showcaseSquares = document.querySelectorAll('.showcase-added')
+  showcaseSquares.forEach((el) => {
+    let renderAgain = showcaseContent.getBoundingClientRect()
+    el.style.height = renderAgain.height / 4 + 'px'
+    el.style.width = renderAgain.height / 4 + 'px'
+    // el.style.height = '0'
+    // el.style.height = '25%'
+    addArt();
+  })
+//   for (let i = 0; i < numberOfSquares; i++) {
+//     let div = document.createElement('div')
+//     // div.style.width = rect.height / 4 + 'px'
+//     // div.style.width = '25%'
+//     // div.style.height = rect.height / 4 + 'px'
+//     div.style.height = '25%'
+//     div.style.aspectRatio = '1/1'
+//     div.style.border = '1px solid black'
+//     div.style.display = 'flex'
+//     div.style.alignContent = 'center'
+//     div.style.justifyContent = 'center'
+//     // div.style.position = 'absolute'
+//     div.style.backgroundColor = `rgb(${Math.random() * 100}% ${Math.random() * 100}% ${Math.random() * 100}%)`
+//     div.classList.add(`showcase-${i}`)
+//     div.classList.add(`showcase-added`)
+//     showcaseContent.appendChild(div)
+// }
+}
+
+renderSquares()
+
 
 class SVGStarComponent {
     constructor(parentClass, numberOfSegments, svgPath, drawTime, providedStyles, rotationSpeed = 1) {
@@ -117,19 +176,25 @@ class SVGStarComponent {
     }
   }
 //   let parentClass = 'contact-star-animation-container'
-  let starSegments = 2
+  let starSegments = 1
 //   let starPath = 'M250.81,267.18c-5.26-5.11-6.41-12.72-3.34-17.85,3.92-6.57,14.57-8.82,22.34-2.67-2.65-9.05-10.8-14.65-18.61-13.75-8.24.96-12.44,8.73-12.82,9.46.61.97,3.2,5.27,2.03,10.68-1.08,5.05-5.02,9.16-10.21,10.79'
-  let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
-//   let starPath = 'M266.34,500c-90.49-74.16-97.63-197.07-44.81-257.52,57.46-65.75,196.6-69.86,278.47,30.52-25.92-140.35-137.94-227.09-236.58-215.28-86.43,10.35-136.54,93.23-144.27,106.44,39.74,36.82,44.95,91.57,22.89,120.21-26.05,33.81-96.62,39.67-142.04-10.45'
-//   let starPath = 'M243.43,442.3c5.39,1.08,95.85,17.63,158.53-49.23,45.89-48.95,57.92-122.37,30.24-186.02C436.45,86.81,348.54-1.42,263.42.02c-58.4.99-114.48,44.17-144.27,106.44,39.74,36.82,44.95,91.57,22.89,120.21-26.05,33.81-96.62,39.67-142.04-10.45'
+//trinity
+// let starPath = 'M199.45,294.23c-48.34-27.91-64.91-89.73-37-138.07s89.73-64.91,138.07-37c48.34,27.91,64.91,89.73,37,138.07-27.91,48.34-89.73,64.91-138.07,37ZM212.46,343.84c27.91,48.34,89.73,64.91,138.07,37,48.34-27.91,64.91-89.73,37-138.07-27.91-48.34-89.73-64.91-138.07-37-48.34,27.91-64.91,89.73-37,138.07ZM199.99,192.22c-55.82,0-101.08,45.25-101.08,101.08s45.25,101.08,101.08,101.08,101.08-45.25,101.08-101.08-45.25-101.08-101.08-101.08Z'  
+// let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
+  // let starPath = 'M266.34,500c-90.49-74.16-97.63-197.07-44.81-257.52,57.46-65.75,196.6-69.86,278.47,30.52-25.92-140.35-137.94-227.09-236.58-215.28-86.43,10.35-136.54,93.23-144.27,106.44,39.74,36.82,44.95,91.57,22.89,120.21-26.05,33.81-96.62,39.67-142.04-10.45'
+  // smile
+  let starPath = 'M447.02,250c0,108.81-88.21,197.02-197.02,197.02S52.98,358.81,52.98,250,141.19,52.98,250,52.98s197.02,88.21,197.02,197.02ZM178.74,148.57c-27.83,0-50.39,22.56-50.39,50.39s22.56,50.39,50.39,50.39,50.39-22.56,50.39-50.39-22.56-50.39-50.39-50.39ZM318.21,148.57c-27.83,0-50.39,22.56-50.39,50.39s22.56,50.39,50.39,50.39,50.39-22.56,50.39-50.39-22.56-50.39-50.39-50.39ZM161.2,345.75c48.81,49.35,128.24,49.79,177.6.98'
   let drawTime = 5
   let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '5px'}, {opacity: 1}]
 
-
-  for (let i = 0; i < 200; i++) {
+function addArt() {
+  for (let i = 0; i < squaresToRender; i++) {
       let square = document.querySelector(`.showcase-${i}`)
       let parentClass = `showcase-${i}`
       let starComponent = new SVGStarComponent(parentClass, starSegments, starPath, drawTime, starStyles, 0)
       starComponent.drawStar()
   }
+}
+
+addArt();
 

@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import gsap from 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
+import { mx_bilerp_0 } from 'three/src/nodes/materialx/lib/mx_noise.js';
+// import { rotate } from 'three/webgpu';
 
 gsap.registerPlugin(ScrollToPlugin)
 

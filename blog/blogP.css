@@ -1,0 +1,42 @@
+/* nice colors */
+/* background-color: #ff444499; */
+/* background: #20202099; */
+
+:root {
+    --delta-y: 50px;
+    --delta-y-sm: calc(var(--delta-y)*.5);
+    --delta-margin: calc(-1 * var(--delta-y) - 3px);
+    --delta-margin-sm: calc(-1 * var(--delta-y-sm));
+}
+
+
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, 
+html {
+    height: 100vh;
+    width: 100vw;
+    /* container-type: inline-size; */
+}
+    .concave-bottom {
+        width: 100vw;
+        height: 70vh;
+        background: #ff444499;
+        /* #Concave Bottom */
+        /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 90% 100%, 80% calc(100% - var(--delta-y)), 20% calc(100% - var(--delta-y)), 10% 100%, 0% 100%);  */
+        clip-path: url(./test.svg); 
+    }
+
+    
+
+    .red {
+        background-color: red;
+    }
+
+    .black {
+        background-color: #202020;
+    }
