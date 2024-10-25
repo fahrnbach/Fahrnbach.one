@@ -370,8 +370,10 @@ function showContactButton() {
 // let drawTime = 2.5
 // let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '10px'}, {opacity: 0.5}]
 
-drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
-}
+// drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
+// SVGStarComponent.drawStar();
+// drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
+} 
 
 const navContactButton = document.querySelector('.nav-contact-button');
 navContactButton.addEventListener('pointerup', () => {
