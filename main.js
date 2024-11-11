@@ -3,6 +3,53 @@ import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import gsap from 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 
+//navigation
+
+console.log(window.location.pathname)
+
+//prevent default nav link navigation
+let preventDefaultLinks = document.querySelectorAll('.nav-button-link')
+preventDefaultLinks.forEach((link)=> {
+  link.addEventListener('click', (event) => {
+    event.preventDefault()
+  })
+})
+
+const navPaths = {
+  '/': 'home',
+  '/about': 'about',
+  '/explore': 'explore',
+  '/contact': 'contact'
+}
+
+function navigateHome () {
+  history.pushState({}, '', "/")
+}
+
+function navigateToPath (path) {
+  history.pushState({}, '', `${path}`)
+}
+
+if (!navPaths[window.location.pathname] == true) {
+  document.body.innerHTML = `
+  <div class="background"></div>
+  <h1 class="name">Are You Lost?</h1>
+  <h1 class="name">404 Error</h1>
+  <div class='home-404'>
+  <button class='home-404-button'>
+  Home
+  </div>`
+}
+
+console.log(navPaths[window.location.pathname])
+console.log(navPaths[window.location.pathname])
+
+if (navPaths[window.location.pathname]) {
+  console.log('page loading...')
+
+
+// registration
+
 gsap.registerPlugin(ScrollToPlugin)
 
 console.warn("Hi, Thanks So much for Visiting!", "\n", "I am available for hire, and seeking work!")
@@ -25,6 +72,8 @@ let welcome = () => {
   console.log(message, styles);
 };
 
+// init
+
 welcome()
 
 window.onbeforeunload = function () {
@@ -32,6 +81,13 @@ window.onbeforeunload = function () {
 }
 
 window.scrollTo(0, 0)
+
+let parentClass = 'contact-star-animation-container'
+let starSegments = 15
+let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
+let drawTime = 5
+let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '10px'}, {opacity: 0.5}]
+
 
 const mobileBreakpoint = 650
 
@@ -232,6 +288,7 @@ window.addEventListener('resize', () => {
 //  #endregion Resize Function
 
 // #region Renderer Loop
+// !add framerate setinterval
 const loop = () => {
   if (shouldRender) {
     controls.update()
@@ -343,10 +400,12 @@ function showAboutButton() {
     gsap.to('.about-me', {overwrite: true, y: '250vh', duration: 1})
     gsap.to(window, { overwrite: true, duration: 1, scrollTo: { y: "#about"} });
   }, 100);
+  // window.navigator
 }
 const navAboutButton = document.querySelector('.nav-about-button');
 navAboutButton.addEventListener('pointerup', () => {
   showAboutButton()
+  history.pushState({}, '', "/about")
 })
 // --Contact
 function showContactButton() {
@@ -368,12 +427,15 @@ function showContactButton() {
 // let drawTime = 2.5
 // let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '10px'}, {opacity: 0.5}]
 
-drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
+// drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
+starComponent.drawStar();
+starComponent.undrawStar()
 }
 
 const navContactButton = document.querySelector('.nav-contact-button');
 navContactButton.addEventListener('pointerup', () => {
   showContactButton()
+  history.pushState({}, '', "/contact")
 })
 // -- Explore
 function showExploreButton() {
@@ -394,6 +456,10 @@ function showExploreButton() {
 const navExploreButton = document.querySelector('.nav-explore-button');
 navExploreButton.addEventListener('pointerup', () => {
   showExploreButton()
+  history.pushState({}, '', "/explore")
+})
+navExploreButton.addEventListener('navigate', () => {
+  
 })
 
 
@@ -554,6 +620,7 @@ upButton.addEventListener('pointerup', () => {
 
 const exitAbout = document.querySelector('.exit-about');
 exitAbout.addEventListener('pointerup', () => {
+  navigateHome();
   aboutOpen = false
   gsap.to('.about', {opacity: 1})
   // !Name-Animation on Exit
@@ -574,6 +641,7 @@ exitAbout.addEventListener('pointerup', () => {
 
 const exitExplore = document.querySelector('.exit-explore');
 exitExplore.addEventListener('pointerup', () => {
+  navigateHome();
   exploreOpen = false
   gsap.to('.about', {opacity: 1})
   // console.log('exit-explore')
@@ -596,6 +664,7 @@ exitExplore.addEventListener('pointerup', () => {
 
 const exitContact = document.querySelector('.exit-contact');
 exitContact.addEventListener('pointerup', () => {
+  navigateHome();
   contactOpen = false
   gsap.to('.about', {opacity: 1})
   // console.log('exit-contact')
@@ -780,14 +849,7 @@ class SVGStarComponent {
         }, 10000);
   }
 }
-let parentClass = 'contact-star-animation-container'
-let starSegments = 15
-let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
-let drawTime = 5
-let starStyles = [{fill: 'none'}, {stroke: '#fff'}, {strokeMiterLimit: 10}, {strokeWidth: '10px'}, {opacity: 0.5}]
 let starComponent = new SVGStarComponent(parentClass, starSegments, starPath, drawTime, starStyles, 1)
-starComponent.drawStar()
-starComponent.undrawStar()
 
 // #endregion SVGDrawStarModule
 
@@ -795,3 +857,57 @@ starComponent.undrawStar()
 
 
 // #endRegion SVG Animation
+
+// #region navigation
+if (window.location.pathname == '/about') {
+  setTimeout(() => {
+    showAboutButton();
+    console.log(window.location.pathname)
+  }, 500);
+}
+if (window.location.pathname == '/explore') {
+  setTimeout(() => {
+    showExploreButton();
+    console.log(window.location.pathname)
+  }, 1000);
+  // showExploreButton();
+  // console.log('explore opened')
+}
+if (window.location.pathname == '/contact') {
+  setTimeout(() => {
+    showContactButton();
+    console.log(window.location.pathname)
+  }, 500);
+}
+window.addEventListener('popstate', function(event) {
+  if (window.location.pathname == '/') {
+      nameToOpaque()
+      nameMoveToTop()
+  }
+  if (window.location.pathname == '/about') {
+    setTimeout(() => {
+      showAboutButton();
+      console.log(window.location.pathname)
+    }, 500);
+  }
+  if (window.location.pathname == '/explore') {
+    setTimeout(() => {
+      showExploreButton();
+      console.log(window.location.pathname)
+    }, 1000);
+    // showExploreButton();
+    // console.log('explore opened')
+  }
+  if (window.location.pathname == '/contact') {
+    setTimeout(() => {
+      showContactButton();
+      console.log(window.location.pathname)
+    }, 500);
+  }
+  console.log('Back button pressed');
+});
+
+console.log(navPaths[window.location.pathname])
+
+// #endregion navigation
+}

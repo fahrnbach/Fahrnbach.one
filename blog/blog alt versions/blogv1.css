@@ -1,0 +1,525 @@
+/* nice colors */
+/* background-color: #ff444499; */
+/* background: #20202099; */
+
+:root {
+    --delta-y: 50px;
+    --delta-y-sm: calc(var(--delta-y)*.5);
+    --delta-margin: calc(-1 * var(--delta-y) - 3px);
+    --delta-margin-sm: calc(-1 * var(--delta-y-sm));
+    --hero-height: 70vh;
+    /* used for setting logo container height and offset for content background */
+    --hero-trim: 50px;
+    /* used to set body and hero trim bg */
+    --hero-trim-color: #101010
+}
+
+
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    position: relative;
+    /* height: 100vh;
+    width: 100vw; */
+    /* container-type: inline-size; */
+    font-family: "myriad-pro", sans-serif, "Arial";
+    font-weight: 600;
+    font-style: normal;
+}
+body{
+    height: 100%;
+    width: 100vw;
+    background-color: var(--hero-trim-color)
+    /* background-color: red; */
+    /* container-type: inline-size; */
+}
+
+    .concave-bottom {
+        width: 100vw;
+        height: var(--hero-height);
+        background: #ff444499;
+        /* #Concave Bottom */
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 90% 100%, 80% calc(100% - var(--delta-y)), 20% calc(100% - var(--delta-y)), 10% 100%, 0% 100%); 
+    }
+
+    .concave-bottom-hero {
+        width: 100vw;
+        height: var(--hero-height);
+        background: #ff444499;
+        /* #Concave Bottom */
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 90% 100%, 80% calc(100% - var(--delta-y)), 80% calc(100% + var(--hero-trim)), 20% calc(100% + var(--hero-trim)), 20% calc(100% - var(--delta-y)), 10% 100%, 0% 100%); 
+    }
+
+    .concave-top{
+        margin-top: var(--delta-margin);
+        width: 100vw;
+        height: 70vh;
+        background: #ff444499;
+        /* #Concave Top */
+        clip-path: polygon(0% 0%, 10% 0%, 20% var(--delta-y), 80% var(--delta-y), 90% 0%, 100% 0%, 100% 100%, 0% 100%); 
+    }
+
+    .concave-top-and-bottom{
+        margin-top: var(--delta-margin);
+        width: 100vw;
+        height: 170vh;
+        background: #ff444499;
+        /* #Concave Top + Bottom */
+        clip-path: polygon(0% 0%, 10% 0%, 20% var(--delta-y), 80% var(--delta-y), 90% 0%, 100% 0%, 100% 100%, 90% 100%, 80% calc(100% - var(--delta-y)), 20% calc(100% - var(--delta-y)), 10% 100%, 0% 100%);
+    }
+
+    .convex-top {
+        margin-top: var(--delta-margin);
+        width: 100vw;
+        height: 100vh;
+        background: #20202099;
+        background: #202020;
+        /* #Convex Top */
+        clip-path: polygon(0% var(--delta-y), 10% var(--delta-y), 20% 0%, 80% 0%, 90% var(--delta-y), 100% var(--delta-y), 100% 100%, 0% 100%); 
+    }
+
+    .convex-bottom {
+        margin-top: var(--delta-margin);
+        width: 100vw;
+        height: 100vh;
+        background: #20202099;
+        background: #202020;
+        /* #Convex Bottom */
+        clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--delta-y)), 90% calc(100% - var(--delta-y)), 80% 100%, 20% 100%, 10% calc(100% - var(--delta-y)), 0% calc(100% - var(--delta-y))); 
+    }
+
+    
+    .convex-top-and-bottom {
+        margin-top: var(--delta-margin);
+        width: 100vw;
+        height: 100vh;
+        background: #20202099;
+        background: #202020;
+        /* #Convex Bottom */
+        /* clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 90% 90%, 80% 100%, 20% 100%, 10% 90%, 0% 90%);  */
+        /* #Convex Top + Bottom */
+        /* clip-path: polygon(0% 10%, 10% 10%, 20% 0%, 80% 0%, 90% 10%, 100% 10%, 100% 90%, 90% 90%, 80% 100%, 20% 100%, 10% 90%, 0% 90%);  */
+        
+        /* !Use for !clip path size */
+        font-size: 30%;
+        /* !Use for !clip path size */
+        /* clip-path: polygon(0% 10em, 10% 10em, 20% 0em, 80% 0em, 90% 10em, 100% 10em, 100% calc(100% - 10em), 90% calc(100% - 10em), 80% 100%, 20% 100%, 10% calc(100% - 10em), 0% calc(100% - 10em));  */
+        
+        clip-path: polygon(0% var(--delta-y), 10% var(--delta-y), 20% 0, 80% 0, 90% var(--delta-y), 100% var(--delta-y), 100% calc(100% - var(--delta-y)), 90% calc(100% - var(--delta-y)), 80% 100%, 20% 100%, 10% calc(100% - var(--delta-y)), 0% calc(100% - var(--delta-y))); 
+    }
+
+    .convex-top-and-bottom-hero-trim {
+        margin-top: var(--delta-margin);
+        width: 100vw;
+        height: 200vh;
+        background: #20202099;
+        background: #202020;
+        clip-path: polygon(0% var(--delta-y), 10% var(--delta-y), 20% 0, 20% var(--hero-trim), 80% var(--hero-trim), 80% 0, 90% var(--delta-y), 100% var(--delta-y), 100% calc(100% - var(--delta-y)), 90% calc(100% - var(--delta-y)), 80% 100%, 20% 100%, 10% calc(100% - var(--delta-y)), 0% calc(100% - var(--delta-y))); 
+    }
+
+    .red {
+        background-color: red;
+        background-color: #ff444499;
+        background: linear-gradient(#e66465, #9198e5);
+        box-shadow: 0px 10px 10px 10px red;
+    }
+
+    .black {
+        background-color: #202020;
+    }
+
+    .photo {
+        background: url(../public/models/Firefly\ black\ background\ illustration\ of\ drawn\ planets\ with\ colorful\ shooting\ stars\ 46155.jpg);
+        background-size: contain;
+        background-position: center;
+        /* background-repeat: no-repeat; */
+    }
+
+    .content-background {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 10%;
+        display: flex;
+        justify-self: center;
+        /* height: 300%; */
+        width: 80%;
+        background-color: #20202033;
+        box-shadow: 10px -20px 15px -4px black, -10px -20px 8px -4px;
+    }
+
+    .content-background2 {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 20%;
+        /* display: flex; */
+        justify-self: center;
+        justify-content: center;
+        align-content: center;
+        /* height: 300%; */
+        width: 60%;
+        background-color: #20202033;
+        box-shadow: 10px -20px 15px -4px black, -10px -20px 8px -4px;
+    }
+
+    .main-title-container {
+        position: fixed;
+        width: 100%;
+        height: 10%;
+        /* display: grid;
+        grid-template-columns:1fr 3fr 1fr 3fr 1fr;
+        grid-template-rows: 1fr; */
+        flex-direction: column;
+        justify-self: center;
+        align-items: center;
+        justify-content: center;
+        /* z-index: 3; */
+    }
+
+    .main-title {
+        width: 50%;
+        /* padding-top: 10rem; */
+        display: flex;
+        justify-self: center;
+        color: white;
+        font-size: 8rem;
+        font-family: "myriad-pro", sans-serif, "Arial";
+        font-weight: 600;
+        font-style: normal;
+    }
+    
+    .main-divider {
+        width: 100%;
+        /* height: 10%; */
+        display: flex;
+        justify-self: center;
+        color: white;
+        border-bottom: 10px solid white;
+    }
+
+    .main-divider-special {
+        /* position: absolute; */
+        margin-top: 1rem;
+        top: 5rem;
+        width: 100%;
+        height: 100%;
+        height: calc(var(--delta-y) + 1px);
+        display: flex;
+        justify-self: center;
+        color: white;
+        background-color: blue;
+        background-color: #ffffff99;
+        background: linear-gradient(#ffffff, #0000ff);
+        clip-path: polygon(0% var(--delta-y), 10% var(--delta-y), 20% 0%, 80% 0%, 90% var(--delta-y), 100% var(--delta-y), 100% 100%, 0% 100%, 100% 100%, 90% 100%, 80% calc(100% - var(--delta-y)), 20% calc(100% - var(--delta-y)), 10% 100%, 0% 100%);
+    }
+
+    .main-subtitle {
+        width: 50%;
+        display: flex;
+        justify-self: center;
+        color: white;
+        font-size: 5rem;
+        font-family: "myriad-pro", sans-serif, "Arial";
+        font-weight: 600;
+        font-style: normal;
+    }
+    .category-title {
+
+    }
+
+    .spacer {
+        height: calc(var(--hero-height) + var(--hero-trim));
+        width: 100%;
+    }
+
+    .nav-container {
+        position: relative;
+        width: 60%;
+        height: 10%;
+        top: calc (var(--hero-height) - var(--delta-y));
+        background-color: #ffffff33;
+    }
+
+    .content-container {
+        position: absolute;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        top: calc(var(--hero-height) - var(--delta-y) - 3px);
+        width: 100%;
+        height: calc(100% - (var(--hero-height) - var(--delta-y) - 3px));
+        /* background-color: purple; */
+    }
+
+
+    .content {
+        /* margin-top: var(--hero-trim); */
+        width: 60%;
+        background-color: #ffffff99;
+    }
+
+    
+    .content-logo {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 100%;
+        /* height: var(--hero-trim); */
+        height: 3%;
+        background-color: var(--hero-trim-color);
+    }
+    
+
+    .star-container-hero-left {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 1fr;
+        /* top: -60vh; */
+        bottom: 0;
+        width: 20%;
+        height: 100%;
+    }
+
+    .star-container-hero-right {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 1fr;
+        /* top: -60vh; */
+        right: 0;
+        bottom: 0;
+        width: 20%;
+        height: 100%;
+    }
+    .star-container {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 1fr;
+        /* top: -60vh; */
+        bottom: 0;
+        width: 60%;
+        height: 100%;
+    }
+
+    .star-bg-lg,
+    .star-bg-md,
+    .star-bg-sm,
+    .star-bg-lg-hero,
+    .star-bg-md-hero,
+    .star-bg-sm-hero {
+        opacity: 1;
+        position: relative;
+        grid-row-start: 1;
+        grid-column-start: 1;
+        top: 0;
+        /* bottom: 0; */
+        width: 100%;
+        background-repeat: repeat;
+    }
+
+    .star-bg-lg,
+    .star-bg-md,
+    .star-bg-sm {
+        height: 100%
+    }
+    
+    .star-bg-lg-hero,
+    .star-bg-md-hero,
+    .star-bg-sm-hero {
+        height: var(--hero-height);
+    }
+
+    .star-bg-lg,
+    .star-bg-lg-hero {
+        background-image: url(../public/2x/Large-star-tile@2x.webp);
+        animation: 16s ease 3s infinite lgStarAnimate ;
+    }
+
+    .star-bg-md,
+    .star-bg-md-hero {
+        background-image: url(../public/2x/Medium-star-tile@2x.webp);
+        animation: 9s ease 6s infinite mdStarAnimate ;
+    }
+
+    .star-bg-sm,
+    .star-bg-sm-hero {
+        background-image: url(../public/2x/Small-star-tile@2x.webp);
+        animation: 9s ease 9s infinite smStarAnimate ;
+    }
+
+    @keyframes smStarAnimate {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes mdStarAnimate {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes lgStarAnimate {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+    
+
+    .logo-container {
+        opacity: .5;
+        z-index: 10;
+        top: 15vh;
+        width: 20%;
+        height: 10vh;
+        position: fixed;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .logo-link {
+        position: absolute;
+        top: -10vh;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .logo {
+        display: flex;
+        width: 75%;
+        /* height: 100%; */
+        /* aspect-ratio: 1/1; */
+    }
+
+
+    .content-nav{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 2%;
+        /* background-color: red; */
+        font-size: 3rem;
+    }
+
+    .content-header {
+        width: 100%;
+        height: 10%;
+        background-color: green;
+    }
+
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        overflow-y: hidden;
+    }
+
+    .bottom {
+        margin-bottom: 30rem;
+    }
+
+    @media screen and (max-width: 420px) {
+        /* .content-background{
+            display: none;
+            background-color: #ffffff66;
+        } */
+
+        .content-background2{
+            display: none;
+            background-color: #20202066;
+        }
+
+        .content {
+            width: 80%;
+        }
+
+        /* .concave-top-and-bottom{
+        clip-path: polygon(0% 0%, 20% var(--delta-y), 80% var(--delta-y), 100% 0%, 100% 100%, 80% calc(100% - var(--delta-y)), 20% calc(100% - var(--delta-y)), 0% 100%);
+        }
+
+        .convex-top-and-bottom {
+        background: gold;
+        clip-path: polygon(0% var(--delta-y), 20% 0, 80% 0, 100% var(--delta-y), 100% calc(100% - var(--delta-y)), 80% 100%, 20% 100%, 0% calc(100% - var(--delta-y))); 
+
+        }
+
+        .convex-top{
+        background: blue;
+        clip-path: polygon(0% var(--delta-y), 20% 0%, 80% 0%, 100% var(--delta-y), 100% 100%, 0% 100%); 
+        }
+
+        .concave-bottom {
+            background: yellow;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100% 80% calc(100% - var(--delta-y)), 20% calc(100% - var(--delta-y)), 0% 100%); 
+        } */
+        .concave-top-and-bottom{
+        clip-path: polygon(0% 0%, 10% var(--delta-y-sm), 90% var(--delta-y-sm), 100% 0%, 100% 100%, 90% calc(100% - var(--delta-y-sm)), 10% calc(100% - var(--delta-y-sm)), 0% 100%);
+        }
+
+        .convex-top-and-bottom {
+        clip-path: polygon(0% var(--delta-y-sm), 10% 0, 90% 0, 100% var(--delta-y-sm), 100% calc(100% - var(--delta-y-sm)), 90% 100%, 10% 100%, 0% calc(100% - var(--delta-y-sm))); 
+
+        }
+
+        .convex-top{
+            margin-top: calc(var(--delta-margin) * 1.5);
+        clip-path: polygon(0% var(--delta-y-sm), 10% 0%, 90% 0%, 100% var(--delta-y-sm), 100% 100%, 0% 100%); 
+        }
+
+        .concave-bottom {
+        /* #small screen */
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100% 90% calc(100% - var(--delta-y-sm)), 10% calc(100% - var(--delta-y-sm)), 0% 100%); 
+        }
+        .concave-bottom-hero-header {
+        /* #small screen */
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100% 90% calc(100% - var(--delta-y-sm)), 10% calc(100% - var(--delta-y-sm)), 0% 100%); 
+        }
+
+        .concave-top{
+            /* #untested */
+            clip-path: polygon(0% 0%, 10% var(--delta-y-sm), 90% var(--delta-y-sm), 100% 0%, 100% 100%, 0% 100%);
+            overflow: hidden;
+        }
+
+        .convex-bottom {
+           /* #untested */
+            clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--delta-y-sm)), 90% 100%, 10% 100%, 0% calc(100% - var(--delta-y-sm))); 
+        }
+
+        /* .footer {
+            position: absolute;
+            bottom: -10%;
+        } */
+
+    }

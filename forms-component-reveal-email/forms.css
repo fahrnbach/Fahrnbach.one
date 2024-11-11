@@ -1,0 +1,146 @@
+:root {
+    --opacity-transition: opacity 1s
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.email-form {
+    display: block;
+    position: absolute;
+    width: 50vw;
+    height: 70vh;
+    background-color: #20202088;
+}
+
+.email-header{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    height: 10%;
+    color: white;
+}
+
+.email-title {
+    padding-top: .3rem;
+    font-size: 100%;
+    text-align: center;
+}
+
+.email-body {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+    overflow-y: scroll;
+    text-align: start;
+    vertical-align: baseline;
+    font-size: clamp(2.5vw, 50%, 4vw)
+}
+
+.email-prompt {
+    padding: .3rem;
+    display: flex;
+    width: 70%;
+    text-wrap: wrap;
+    white-space: pre;
+    color: white;
+    /* background-color: #fff; */
+    margin-bottom: .5rem;
+}
+
+.email-prompt-button {
+    padding: .5rem;
+    display: flex;
+    align-self: flex-end;
+    align-content: center;
+    justify-content: end;
+    width: 70%;
+    text-wrap: wrap;
+    background-color: #0000bb33;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: .3rem;
+    margin-right: .3rem;
+    transition: var(--opacity-transition);
+    opacity: 0;
+    /* user-select: none; */
+}
+
+.email-prompt-button:hover {
+    background-color: #0000bb11;
+    cursor: pointer;
+}
+
+.email-reply {
+    padding: .5rem;
+    display: flex;
+    align-self: flex-end;
+    align-content: center;
+    justify-content: end;
+    width: 50%;
+    text-wrap: wrap;
+    background-color: #0000bb33;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: .3rem;
+    margin-right: .3rem;
+    opacity: 0;
+    transition: var(--opacity-transition);
+}
+
+.email-warn{
+    height: 0%;
+    width: 100%;
+}
+
+form {
+    height: 10%;
+    width: 100%;
+}
+
+.input-wrapper {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+    height: 100%;
+    width: 100%;
+}
+
+.email-input {
+    font-size: 100%;
+    height: 100%;
+    width: 80%;
+    padding-left: .3rem;
+}
+
+.email-submit {
+    height: 100%;
+    width: 20%;
+    border: none;
+    background-color: #ffffff44;
+    color: blue;
+
+}
+
+
+/* !Honeypot */
+
+.phone-number {
+    width: 100%;
+    height: 0%;
+}
+
+
+

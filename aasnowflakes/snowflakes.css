@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    /* background: url(../public/snow/Firefly\ snowy\ winter\ wonderland\ 36239.jpg); */
+    background: url(../public/snow/Firefly\ snowy\ winter\ wonderland\ illustration\ 59930.jpg);
+    background-size: cover;
+    overflow: hidden;
+    /* mask-image: url(../public/2x/card-mask@2x.webp);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: cover; */
+}
+
+.message{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    color: white;
+    font-size: 10rem;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-family: "above-the-sky-script", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+.snowCircle1,
+.snowCircle2,
+.snowCircle3 {
+    position: absolute;
+    width: 500vmax;
+    height: 500vmax;
+    top: -200vmax;
+    /* top: 0vw; */
+    bottom: 0vmax;
+    right: -50vmax;
+    /* background-color: red; */
+    background-image: url(../public/snow/2x/snowflakes@2x.webp);
+    background-size: 100px;
+    background-repeat: repeat;
+    border-radius: 100%;
+    animation: rotateR 1000s linear infinite;
+}
+
+.snowCircle2{
+    left: -50vmax;
+    opacity: .5;
+    animation: rotateL 1500s linear infinite
+}
+
+.snowCircle3{
+    opacity: .1;
+    animation: rotateR 700s linear infinite;
+}
+
+@keyframes rotateR {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateL {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* @media screen and (max-width: 650px) {
+    body {
+        mask-image: url(../public/2x/card-mask-mobile@2x.webp);
+        background-color: rebeccapurple;
+    }
+} */
