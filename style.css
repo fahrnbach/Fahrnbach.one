@@ -321,6 +321,7 @@ svg{ overflow : visible ; }
   aspect-ratio: 1/1;
   background-color: red;
   background-image: url(public/IMG_20190122_041649_869.webp);
+  background-size: cover;
   border-radius: 50%;
   border: 5px solid white;
 }
