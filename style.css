@@ -320,7 +320,7 @@ svg{ overflow : visible ; }
   width: 40%;
   aspect-ratio: 1/1;
   background-color: red;
-  background-image: url(public/cat.svg);
+  background-image: url(public/IMG_20190122_041649_869.webp);
   border-radius: 50%;
   border: 5px solid white;
 }
