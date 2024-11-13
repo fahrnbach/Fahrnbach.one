@@ -150,6 +150,7 @@ svg{ overflow : visible ; }
   top: 50px;
   text-wrap: nowrap;
   /* transform: translate(-50%, 75%); */
+  
 
   font-family: "myriad-pro", sans-serif, "Arial";
   font-weight: 600;
@@ -158,6 +159,18 @@ svg{ overflow : visible ; }
   font-size: 3rem;
   font-size: clamp(3vw, 3rem, 4vw);
 }
+
+
+.contact-info {
+  position: relative;
+  display: block;
+  top: clamp(5rem, 20%, 7rem);
+  right: clamp(3rem, 20%, 5rem);
+  color: white;
+  font-size: clamp(3rem, 20%, 5rem);
+  z-index: 50;
+}
+
 
 .nav-button {
   position: relative;
@@ -369,6 +382,7 @@ svg{ overflow : visible ; }
   font-family: "myriad-pro", sans-serif, "Arial";
   font-weight: 600;
   font-style: normal;
+  user-select: none;
 }
 
 .reload {

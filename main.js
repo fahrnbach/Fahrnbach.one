@@ -26,19 +26,16 @@ function navigateHome () {
   history.pushState({}, '', "/")
 }
 
+function navigate404 () {
+  history.pushState({}, '', "/404")
+}
+
 function navigateToPath (path) {
   history.pushState({}, '', `${path}`)
 }
 
 if (!navPaths[window.location.pathname] == true) {
-  document.body.innerHTML = `
-  <div class="background"></div>
-  <h1 class="name">Are You Lost?</h1>
-  <h1 class="name">404 Error</h1>
-  <div class='home-404'>
-  <button class='home-404-button'>
-  Home
-  </div>`
+  navigate404();
 }
 
 console.log(navPaths[window.location.pathname])
