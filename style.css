@@ -8,6 +8,9 @@
 body {
   overflow-y: scroll;
   background-color: black;
+  font-family: "myriad-pro", sans-serif, "Arial";
+  font-weight: 600;
+  font-style: normal;
 }
 
 svg{ overflow : visible ; }
@@ -454,6 +457,11 @@ svg{ overflow : visible ; }
   z-index: 35;
 }
 
+.explore-spacer {
+  height: 50vh;
+  width: 100%;
+}
+
 .explore-projects {
   display: flex;
   flex-wrap: wrap;
@@ -474,11 +482,25 @@ svg{ overflow : visible ; }
 }
 
 .explore-card-inner {
+  display: flex;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
   width: 75%;
   /* height: 75%; */
   aspect-ratio: 1/1;
   background-color: #bbbbbb;
   /* border: ; */
+}
+
+.explore-photo {
+  height: 100%;
+  width: 100%;
+}
+
+.explore-label {
+  font-size: clamp(5rem, 5vh, 7rem);
+  color: white;
 }
 
 .star {
