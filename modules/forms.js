@@ -1,3 +1,6 @@
+import { validateEmail } from './emailValidate.js'
+
+
 let emailBody = document.querySelector('.email-body')
 let input = document.querySelector('.email-input')
 input.addEventListener('mouseup', () => {
@@ -150,7 +153,7 @@ let magicLinks = {
 let helpFunction1; let helpFunction2; let helpFunction3; let helpFunction4
 let helpOptions = ['Email Me','Get More Info','Let\'s Work Together','Other']
 let helpOptionsPrompt = {
-    opt1: 'Sure Thing! Enter Your Email below, \n and I\'ll email you soon.',
+    opt1: 'Sure Thing! Enter Your Email below, \n and I\'ll email you soon :)',
     opt2: 'Two',
     opt3: 'Three',
     opt4: 'Four',

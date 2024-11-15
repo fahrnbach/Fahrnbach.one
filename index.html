@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="./public/IMG_20190122_041649_869.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./modules/forms.css">
     <link rel="stylesheet" href="https://use.typekit.net/eik3zxm.css">
     <meta name="description" content="Jacob Fahrnbach, Full Stack Web Developer. I Love Making Music, Art, and Of Course - Cool Websites! Welcome :)">
     <title>Fahrnbach.one Home</title>
@@ -113,10 +114,29 @@
   </section>
   <section class="contact" id="contact">
     <div class="contact-background"></div>
-    <h1 class="contact-info">jacob@fahrnbach.one</h1>
+    <!-- <h1 class="contact-info">jacob@fahrnbach.one</h1> -->
     <button class="exit-contact exit" aria-label="Exit About Me">X</button>
     <div class="contact-content">
       <div class="contact-star-animation-container"></div>
+      <!-- ! Email Module -->
+      <div class="email-form">
+        <div class="email-header">
+            <div class="email-title">Email Assistant</div>
+        </div>
+            <div class="email-body">
+            </div>
+            <div class="email-warn"></div>
+            <form class="form" action="">
+            <div class="input-wrapper">
+                <input class="phone-number" type="number">
+                <input class="email-input" type="text" name="email" id="email-input" autocomplete="off" value="What is your email?">
+                <button class="email-submit">
+                    <img src="../javascript.svg" alt="">
+                </button>
+            </div>
+        </form>
+    </div>
+    <!-- ! Email Module -->
       <!-- <svg class="contact-star-animation-container" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500">
         <defs>
           <style>
@@ -149,6 +169,7 @@
     </div>
   </div>
   </section>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/main.js" defer></script>
+    <script type="module" src="/modules/forms.js" defer></script>
   </body>
 </html>

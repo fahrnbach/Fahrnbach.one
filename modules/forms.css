@@ -17,11 +17,12 @@ body {
 .email-form {
     display: block;
     position: absolute;
-    width: 50vw;
-    height: 70vh;
+    right: 0;
+    width: 40vw;
+    height: 100vh;
     background-color: #20202088;
     z-index: 50;
-    opacity: .5;
+    opacity: .8;
 }
 
 .email-header{
