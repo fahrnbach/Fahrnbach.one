@@ -79,17 +79,25 @@ form.addEventListener('submit', (e) => {
             }, env.promptDelay);
             break
         case 9:
+        let STATE_POSITION_INITIAL = STATE_POSITION
         let unsanitizedEmail = userEntry
-        responses.where = validateEmail(unsanitizedEmail)
-        STATE.emailCollected = true
-        STATE_POSITION++
-            console.log('sending email...')
-        addReplyEmail(responses.where)
-        STATE.emailReply = true
-        //Send Email Logic
-        repopulatePrompts()
-        // addPromptGoodbye(responses.where)
-        addPromptGoodbye(prompts.thank)
+        let maybeValidatedEmail = validateEmail(unsanitizedEmail)
+        if (maybeValidatedEmail) {
+            responses.where = maybeValidatedEmail
+            STATE.emailCollected = true
+            STATE_POSITION++
+                console.log('sending email...')
+            addReplyEmail(responses.where)
+            STATE.emailReply = true
+            //Send Email Logic
+            repopulatePrompts()
+            // addPromptGoodbye(responses.where)
+            addPromptGoodbye(prompts.thank)
+        } else {
+            STATE_POSITION = STATE_POSITION_INITIAL
+            addReplyInvalidEmail('Invalid Email')
+            console.log('retry email')
+        }
     }
     setTimeout(() => {
         addPromptHelpButtons()
@@ -326,6 +334,23 @@ function addReplyEmail(resText) {
         scrollToBottom()
         STATE.emailReply = true
         STATE_POSITION++
+    }
+    // console.log('in responses.who')
+    
+}
+
+function addReplyInvalidEmail(resText) {
+    // console.log(resText + 'text')
+    if (!STATE.goodbyePrompt) {
+        let el = document.createElement('div')
+        el.classList.add('email-reply')
+        el.innerText = resText
+        emailBody.appendChild(el)
+        // typeChar(resText, el);
+        setTimeout(() => {
+            el.style.opacity = '1'
+        }, env.opacityDelay);
+        scrollToBottom()
     }
     // console.log('in responses.who')
     
