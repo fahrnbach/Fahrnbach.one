@@ -151,7 +151,7 @@ form {
         margin: auto;
         position: absolute;
         width: 100vw;
-        height: 100vh;
+        height: 100dvh;
         background-color: #20202088;
         z-index: 50;
     }
