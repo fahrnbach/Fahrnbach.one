@@ -27,6 +27,7 @@ function navigateHome () {
 }
 
 function navigate404 () {
+  window.location.replace('/404')
   history.pushState({}, '', "/404")
 }
 
@@ -79,7 +80,7 @@ window.onbeforeunload = function () {
 
 window.scrollTo(0, 0)
 
-let parentClass = 'contact-star-animation-container'
+let parentClass = 'contact-star-hookin'
 let starSegments = 15
 let starPath = 'M259.13,443.35c-59.24-57.45-72.1-143.09-37.6-200.87,44.13-73.88,163.94-99.24,251.35-30.08-29.77-101.85-121.56-164.89-209.46-154.68-92.69,10.77-139.99,98.21-144.27,106.44,6.9,10.86,35.96,59.25,22.89,120.21-12.19,56.88-56.43,103.11-114.93,121.38'
 let drawTime = 5
@@ -426,7 +427,6 @@ function showContactButton() {
 
 // drawStarFxParent(parentClass, starSegments, starPath, drawTime, starStyles, 5, false);
 starComponent.drawStar();
-starComponent.undrawStar()
 }
 
 const navContactButton = document.querySelector('.nav-contact-button');
@@ -680,8 +680,9 @@ exitContact.addEventListener('pointerup', () => {
   setTimeout(() => {
     exiting = false
   }, 1050);
-  drawStarFxParent('contact-star-animation-container',0,0,0,0,0, true)
+  // drawStarFxParent('contact-star-animation-container',0,0,0,0,0, true)
   console.log('exiting')
+  starComponent.undrawStar()
 })
 
 //#region Explore Stars
@@ -823,27 +824,25 @@ class SVGStarComponent {
 
 
   undrawStar() {
-    setTimeout(() => {
       
       clearInterval(this.rotating)
-      const svgEl= document.querySelector('.drawStarFXSVG')
+      const svgEl = document.querySelector('.drawStarFXSVG')
+      const hookin = document.querySelector('.contact-star-hookin')
       const starSegments = document.querySelectorAll('.line1')
       const parentEl = svgEl.parentElement
+      // hookin.style,backgroundColor = 'blue'
       starSegments.forEach((el) => {
         let length = el.getTotalLength();
         setTimeout(() => {
           el.style.strokeDashoffset = length;
         }, 0);
-          setTimeout(() => {
                 // console.log(parentEl)
                 while (svgEl.firstChild) {
                     svgEl.removeChild(svgEl.lastChild);
                   }
                   svgEl.remove();
                   parentEl.removeAttribute('style');
-              }, 10000);
           })
-        }, 10000);
   }
 }
 let starComponent = new SVGStarComponent(parentClass, starSegments, starPath, drawTime, starStyles, 1)

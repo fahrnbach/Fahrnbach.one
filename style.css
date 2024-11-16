@@ -6,11 +6,14 @@
 }
 
 body {
+  /* position: fixed; */
+  display: block;
   overflow-y: scroll;
   background-color: black;
   font-family: "myriad-pro", sans-serif, "Arial";
   font-weight: 600;
   font-style: normal;
+  /* height: 200vh; */
 }
 
 svg{ overflow : visible ; }
@@ -373,7 +376,7 @@ svg{ overflow : visible ; }
 
 .exit {
   width: 50px;
-  position: absolute;
+  position: fixed;
   height: 50px;
   top: 0;
   right: 5px;
@@ -566,14 +569,33 @@ svg{ overflow : visible ; }
   /* background-color: #000000; */
 }
 
+/* Hook-in for star render module */
 .contact-star-animation-container {
+  position: fixed;
   display: flex;
   flex-wrap: wrap;
+  align-self: center;
   align-content: center;
   justify-content: center;
-  height: 50%;
+  height: 100%;
+  width: 100%;
   aspect-ratio: 1/1;
   background-color: transparent;
+  bottom: 0;
+  top: 0;
+}
+
+.contact-star-hookin {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+  width: 50%;
+  aspect-ratio: 1/1;
+  /* height: 100%; */
+  /* background: red; */
+  /* background-color: red; */
 }
 
 .contact-star {

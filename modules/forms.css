@@ -1,5 +1,7 @@
 :root {
-    --opacity-transition: opacity 1s
+    --opacity-transition: opacity 1s;
+    /* --prompt-color: red; */
+    --prompt-color: #0000bb33;
 }
 
 * {
@@ -18,7 +20,7 @@ body {
     display: block;
     position: absolute;
     right: 0;
-    width: 40vw;
+    width: 35vw;
     height: 100vh;
     background-color: #20202088;
     z-index: 50;
@@ -71,6 +73,7 @@ body {
     width: 70%;
     text-wrap: wrap;
     background-color: #0000bb33;
+    background-color: var(--prompt-color);
     color: white;
     border-radius: 5px;
     margin-bottom: .3rem;
@@ -78,6 +81,7 @@ body {
     transition: var(--opacity-transition);
     opacity: 0;
     /* user-select: none; */
+    background-color: var(--prompt-color);
 }
 
 .email-prompt-button:hover {
@@ -94,6 +98,7 @@ body {
     width: 50%;
     text-wrap: wrap;
     background-color: #0000bb33;
+    background-color: var(--prompt-color);
     color: white;
     border-radius: 5px;
     margin-bottom: .3rem;
@@ -149,11 +154,13 @@ form {
     .email-form {
         opacity: 1;
         margin: auto;
-        position: absolute;
+        position: fixed;
         width: 100vw;
         height: 100dvh;
         background-color: #20202088;
         z-index: 50;
+        bottom: 0;
+        top: 0;
     }
 
     .email-title {
@@ -162,6 +169,11 @@ form {
 
     .email-body {
         font-size: clamp(5vw, 50%, 8vw)
+    }
+
+
+    .email-icon {
+        height: 100%;
     }
 }
 
