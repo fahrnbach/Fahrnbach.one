@@ -1,7 +1,8 @@
 # www.fahrnbach.one — Developer Portfolio & Personal Website
 
 A minimalist, handcrafted personal website to showcase my journey, projects, and design sensibilities. 
-Built entirely with vanilla JavaScript, HTML, and CSS—no frameworks (except for threejs), no dependencies; just code, creativity, and craftsmanship.
+Built entirely with vanilla JavaScript, HTML, and CSS. Built without frameworks (except for threejs), or dependencies;
+Just code, creativity, and craftsmanship.
 
 ![Screenshot](./assets/portfolio-screenshot.png)
 
