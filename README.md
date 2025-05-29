@@ -1,5 +1,5 @@
 # www.fahrnbach.one — Developer Portfolio & Personal Website
-```
+
 [🌐 Live Demo (Coming Soon)](https://fahrnbach.one)
 🗃️ Main Portfolio Site
 	•	🎨 Art App
