@@ -81,3 +81,10 @@ I designed and developed the entire site — from layout, responsiveness, and cu
 ├── /js
 │   └── main.js
 ├── README.md
+
+```
+🔗 Links
+	•	🌐 Live Demo (Coming Soon)
+	•	🗃️ Main Portfolio Site
+	•	🎨 Art App
+	•	📖 Blog App w/ Python CMS
