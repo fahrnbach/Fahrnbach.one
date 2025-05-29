@@ -92,3 +92,13 @@ I designed and developed the entire site — from layout, responsiveness, and cu
 >[🎨 Art App](https://art.fahrnbach.one)
 >
 >[📖 Blog App w/ Python CMS](https://blog.fahrnbach.one)
+
+## 📬 Let’s Connect
+
+- 🌐 Portfolio: [fahrnbach.one](https://fahrnbach.one)
+- 💼 LinkedIn: *https://www.linkedin.com/in/fahrnbach*
+- 📧 Email: *jacob@fahrnbach.one*
+
+---
+
+> *“Code is craft. Design is empathy. My goal is to bridge the two.”*
