@@ -1,6 +1,6 @@
 # www.fahrnbach.one — Developer Portfolio & Personal Website
 
-	•	[🌐 Live Demo (Coming Soon)](fahrnbach.one)
+	•	[🌐 Live Demo (Coming Soon)](https://fahrnbach.one)
 	•	🗃️ Main Portfolio Site
 	•	🎨 Art App
 	•	📖 Blog App w/ Python CMS
