@@ -1,4 +1,7 @@
-# www.fahrnbach.one — Developer Portfolio & Personal Website
+# Developer Portfolio & Personal Website
+
+**Live Site:** [fahrnbach.one](https://art.fahrnbach.one)  
+**Repo:** [github.com/fahrnbach/portfolio-site](https://github.com/fahrnbach/portfolio-site)  
 
 A minimalist, handcrafted personal website to showcase my journey, projects, and design sensibilities. 
 Built entirely with vanilla JavaScript, HTML, and CSS. Built without frameworks (except for threejs), or dependencies;
