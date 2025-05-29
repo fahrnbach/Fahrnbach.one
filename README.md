@@ -86,6 +86,9 @@ I designed and developed the entire site — from layout, responsiveness, and cu
 ### Portfolio Links:
 
 >[🌐 Live Demo (Portfolio Site)](https://fahrnbach.one)
+>
 >[🗃️ Angular Component Library](https://library.fahrnbach.one)
+>
 >[🎨 Art App](https://art.fahrnbach.one)
+>
 >[📖 Blog App w/ Python CMS](https://blog.fahrnbach.one)
