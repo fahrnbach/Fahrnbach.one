@@ -1,9 +1,13 @@
 # www.fahrnbach.one — Developer Portfolio & Personal Website
 
 [🌐 Live Demo (Coming Soon)](https://fahrnbach.one)
+<br/>
 [🗃️ Angular Component Library](https://library.fahrnbach.one)
+<br/>
 [🎨 Art App](https://art.fahrnbach.one)
+<br/>
 [📖 Blog App w/ Python CMS](https://blog.fahrnbach.one)
+<br/>
 
 A minimalist, handcrafted personal website to showcase my journey, projects, and design sensibilities. 
 Built entirely with vanilla JavaScript, HTML, and CSS. Built without frameworks (except for threejs), or dependencies;
