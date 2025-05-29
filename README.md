@@ -1,6 +1,6 @@
 # www.fahrnbach.one — Developer Portfolio & Personal Website
 
-[🌐 Live Demo (Coming Soon)](https://fahrnbach.one)
+[🌐 Live Demo (Portfolio Site)](https://fahrnbach.one)
 <br/>
 [🗃️ Angular Component Library](https://library.fahrnbach.one)
 <br/>
