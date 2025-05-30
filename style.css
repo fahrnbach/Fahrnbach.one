@@ -673,7 +673,7 @@ svg{ overflow : visible ; }
   /* align-content: center;
   justify-items: center;
   justify-content: center; */
-  width: 75%;
+  width: 72vh;
   /* height: 75%; */
   aspect-ratio: 1/1;
   background-color: #bbbbbb;
