@@ -373,7 +373,7 @@ function typeChar(text, element){
 }
 
 let testemail = validateEmail('ema.offone@outlook.com')
-console.log(testemail)
+// console.log(testemail)
 
 addPromptWelcome();
 

@@ -56,7 +56,7 @@ console.warn("Hi, Thanks So much for Visiting!", "\n", "I am available for hire,
 
 let welcome = () => {
   let message =
-    '%c 🔥 Thanks For Visiting! Email jacob@fahrnbach.one 🔥';
+    '%c 🔥 Thanks For Visiting! I`m Seeking work, and available for hire \n Email jacob@fahrnbach.one 🔥';
   let styles = [
     'font-size: 12px',
     'color: #fffce1',
@@ -903,7 +903,43 @@ window.addEventListener('popstate', function(event) {
   console.log('Back button pressed');
 });
 
-console.log(navPaths[window.location.pathname])
+console.log(navPaths[window.location.pathname]);
+
+};
 
 // #endregion navigation
-}
+
+// #region explorenav
+const orbButtons = document.querySelectorAll('.orb');
+const sections = document.querySelectorAll('.explore-card-inner');
+
+// 1. Scroll to section on orb click
+orbButtons.forEach((orb, index) => {
+  orb.addEventListener('click', () => {
+    orbButtons.forEach(o => o.classList.remove('active'));
+    orb.classList.add('active');
+
+    const targetSection = sections[index];
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// 2. Highlight orb based on scroll position
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = Array.from(sections).indexOf(entry.target);
+      if (index !== -1) {
+        orbButtons.forEach(o => o.classList.remove('active'));
+        orbButtons[index].classList.add('active');
+      }
+    }
+  });
+}, {
+  threshold: 0.6 // Section is "active" when 60% visible
+});
+
+sections.forEach(section => observer.observe(section));
+// #endregion explorenav
