@@ -89,62 +89,110 @@
       </div> -->
       <div class="explore-projects">
         <div class="explore-spacer"></div>
-        <div class="explore-label">Security Blog</div>
+        <!-- <div class="explore-label">Security Blog</div> -->
         <div class="explore-card">
-          <div class="explore-card-inner">
-            <a href="https://blog.fahrnbach.one/trustandverify"><img class="explore-photo" src="./public/Trust@2x.webp" alt="A stone woman holding a diamond in front of a pink background"></a>
+          <div class="explore-card-inner section-art" data-section="art">
+            <img class="explore-photo" src="./public/Trust@2x.webp" alt="A stone woman holding a diamond in front of a pink background">
+              🐇 Dive Deeper
+            </a>
           </div>
         </div>
-        <div class="explore-label">Network Blog</div>
+        <!-- <div class="explore-label">Network Blog</div> -->
         <div class="explore-card">
-          <div class="explore-card-inner">
-            <a href="https://blog.fahrnbach.one/bravozulu"><img class="explore-photo" src="./public/Bravo_Zulu@2x.webp" alt="A stone man holding a diamond in front of a pink background"></a>
+          <div class="explore-card-inner section-blog" data-section="blog">
+            <img class="explore-photo" src="./public/Bravo_Zulu@2x.webp" alt="A stone man holding a diamond in front of a pink background">
+              🐇 Dive Deeper
+            </a>
           </div>
         </div>
-        <div class="explore-label">Code Blog</div>
+        <!-- <div class="explore-label">Code Blog</div> -->
         <div class="explore-card">
-          <div class="explore-card-inner">
-            <a href="https://blog.fahrnbach.one/infiniteloop"><img class="explore-photo" src="./public/Infinite_Loop@0.5x.webp" alt="A stone woman in front of a starburst background"></a>
+          <div class="explore-card-inner section-library" data-section="library">
+            <img class="explore-photo" src="./public/Infinite_Loop@0.5x.webp" alt="A stone woman in front of a starburst background">
+              🐇 Dive Deeper
+            </a>
           </div>
         </div>
-        <div class="explore-label">Code Blog</div>
+        <!-- <div class="explore-label">Code Blog</div> -->
         <div class="explore-card">
-          <div class="explore-card-inner">
-            <a href="https://blog.fahrnbach.one/infiniteloop"><img class="explore-photo" src="./public/Infinite_Loop@0.5x.webp" alt="A stone woman in front of a starburst background"></a>
+          <div class="explore-card-inner section-ongoing" data-section="ongoing">
+            <img class="explore-photo" src="./public/Infinite_Loop@0.5x.webp" alt="A stone woman in front of a starburst background">
+              🐇 Dive Deeper
+            </a>
           </div>
         </div>
-        <div class="explore-label">Code Blog</div>
+        <!-- <div class="explore-label">Code Blog</div> -->
         <div class="explore-card">
-          <div class="explore-card-inner">
-            <a href="https://blog.fahrnbach.one/infiniteloop"><img class="explore-photo" src="./public/Infinite_Loop@0.5x.webp" alt="A stone woman in front of a starburst background"></a>
+          <div class="explore-card-inner section-portfolio" data-section="portfolio">
+           <img class="explore-photo" src="./public/Infinite_Loop@0.5x.webp" alt="A stone woman in front of a starburst background">
+            🐇 Dive Deeper
+          </a>
           </div>
         </div>
+        <div class="explore-spacer"></div>
         <br>
         <div class="explore-label"></div>
-        <div class="explore-spacer"></div>
       </div>
     </div>
     <div class="explore-content-nav">
       <div class="orb-panel">
-
-        <button class="orb orb-1 section-about" aria-label="Scroll to About">
-          <span class="orb-label">Portfolio</span>
-        </button>
-        <button class="orb orb-2 section-projects" aria-label="Scroll to Projects">
-          <span class="orb-label">Art-Site</span>
-        </button>
-        <button class="orb orb-3 section-contact" aria-label="Scroll to Contact">
-          <span class="orb-label">Blog-Repo</span>
-        </button>
-        <button class="orb orb-4 section-projects" aria-label="Scroll to Projects">
-          <span class="orb-label">Angular-Library</span>
-        </button>
-        <button class="orb orb-5 section-contact" aria-label="Scroll to Contact">
-          <span class="orb-label">Ongoing</span>
-        </button>
+        <div class="orb-container">
+          <button class="orb orb-2 section-art" aria-label="Scroll to Art Section" data-section="art">
+            <span class="orb-label">Art</span>
+          </button>
+        </div>
+        <div class="orb-container">
+          <button class="orb orb-3 section-blog" aria-label="Scroll to Blog Section" data-section="blog">
+            <span class="orb-label">Blog</span>
+          </button>
+        </div>
+        <div class="orb-container">
+          <button class="orb orb-4 section-library" aria-label="Scroll to Library Section" data-section="library">
+            <span class="orb-label">Library</span>
+          </button>
+        </div>
+        <div class="orb-container">
+          <button class="orb orb-5 section-contact" aria-label="Scroll to Ongoing Projects Section" data-section="ongoing">
+            <span class="orb-label">Ongoing</span>
+          </button>
+        </div>
+        <div class="orb-container">
+          <button class="orb orb-1 section-about" aria-label="Scroll to Portfolio Section (Github)" data-section="portfolio">
+            <span class="orb-label">My Portfolio</span>
+          </button>
+        </div>
       </div>
-      <div class="linkedin-panel">
-
+      <div class="tertiary-panel" id="tertiary-panel">
+        <h2 id="project-title">Project Title</h2>
+        <img id="project-image" src="" alt="Project Screenshot" />
+        <p id="project-description">Project description goes here.</p>
+        <div class="button-row">
+          <a
+            id="project-link"
+            class="btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open live site"
+          >
+            🌐 Visit Site
+          </a>
+          <a
+            id="project-code"
+            class="btn secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="View Code on GitHub"
+          >
+            🧑‍💻 View Code
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="floating-preview" class="floating-preview hidden">
+      <img class="preview-thumb" src="" alt="Preview thumbnail" />
+      <div class="preview-info">
+        <h4 class="preview-title"></h4>
+        <a class="preview-blog-link" href="#" target="_blank" title="Read more">🐇 Down the rabbit hole</a>
       </div>
     </div>
   </div>

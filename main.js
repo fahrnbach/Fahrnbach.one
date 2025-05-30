@@ -913,33 +913,170 @@ console.log(navPaths[window.location.pathname]);
 const orbButtons = document.querySelectorAll('.orb');
 const sections = document.querySelectorAll('.explore-card-inner');
 
-// 1. Scroll to section on orb click
-orbButtons.forEach((orb, index) => {
-  orb.addEventListener('click', () => {
-    orbButtons.forEach(o => o.classList.remove('active'));
-    orb.classList.add('active');
+const projectData = {
+    art: {
+      title: 'Art App',
+      description: 'A visually rich app with custom Illustrator UI and AI-enhanced art.',
+      image: '/assets/screenshots/art-screenshot.png',
+      link: 'https://art.fahrnbach.one',
+      code: 'https://github.com/fahrnbach/art-app',
+      blog: 'https://blog.fahrnbach.one'
+    },
+    blog: {
+      title: 'Blog (Python CMS)',
+      description: 'A Markdown-based blog with a custom Python CMS backend.',
+      image: '/assets/screenshots/blog-screenshot.png',
+      link: 'https://blog.fahrnbach.one',
+      code: 'https://github.com/fahrnbach/blog-monorepo',
+      blog: 'https://blog.fahrnbach.one'
+    },
+    library: {
+      title: 'Component Library',
+      description: 'Reusable Angular components built with a custom Node.js backend.',
+      image: '/assets/screenshots/library-screenshot.png',
+      link: 'https://library.fahrnbach.one', // optional custom frontend link
+      code: 'https://github.com/fahrnbach/angular-library',
+      blog: 'https://blog.fahrnbach.one'
+    },
+    ongoing: {
+      title: 'Ongoing Projects',
+      description: 'A responsive site (github 🤣) showcasing my design, dev, and UI skills.',
+      image: '/assets/screenshots/ongoing-screenshot.png',
+      link: 'https://github.com/fahrnbach',
+      code: 'https://github.com/fahrnbach',
+      blog: 'https://blog.fahrnbach.one'
+    },
+    portfolio: {
+      title: 'My Portfolio [You are Here 📍]',
+      description: 'A Single Page Application entirely made in Vanilla Javascript',
+      image: '/assets/screenshots/portfolio-screenshot.png',
+      link: 'https://fahrnbach.one',
+      code: 'https://github.com/fahrnbach',
+      blog: 'https://blog.fahrnbach.one'
+    }
+};
 
-    const targetSection = sections[index];
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth' });
+// 💪 Update Mobile UI Buttons
+document.querySelectorAll('.explore-card-inner').forEach(card => {
+  const key = card.dataset.section;
+  const data = projectData[key];
+
+  if (!data) return;
+
+  const actionDiv = document.createElement('div');
+  actionDiv.className = 'mobile-project-actions';
+
+  if (data.link) {
+    const viewSite = document.createElement('a');
+    viewSite.className = 'mobile-button';
+    viewSite.href = data.link;
+    viewSite.target = '_blank';
+    viewSite.textContent = '🌐 View Site';
+    actionDiv.appendChild(viewSite);
+  }
+
+  if (data.code) {
+    const viewCode = document.createElement('a');
+    viewCode.className = 'mobile-button';
+    viewCode.href = data.code;
+    viewCode.target = '_blank';
+    viewCode.textContent = '📁 View Code';
+    actionDiv.appendChild(viewCode);
+  }
+
+  if (data.blog) {
+    const viewBlog = document.createElement('a');
+    viewBlog.className = 'mobile-button';
+    viewBlog.href = data.blog;
+    viewBlog.textContent = '🐇 Blog Post';
+    actionDiv.appendChild(viewBlog);
+  }
+
+  card.appendChild(actionDiv);
+});
+
+// 🧠 Update tertiary panel display
+function updateTertiaryPanel(key) {
+  const data = projectData[key];
+  if (!data) return;
+
+  const panel = document.getElementById('tertiary-panel');
+  document.getElementById('project-image').src = data.image;
+  document.getElementById('project-image').alt = `${data.title} Screenshot`;
+  document.getElementById('project-title').textContent = data.title;
+  document.getElementById('project-description').textContent = data.description;
+  document.getElementById('project-link').href = data.link;
+  document.getElementById('project-code').href = data.code;
+
+  panel.classList.add('visible');
+}
+
+// ✅ Scroll to section on orb click
+orbButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const sectionKey = button.dataset.section;
+    orbButtons.forEach(o => o.classList.remove('active'));
+    button.classList.add('active');
+
+    const target = document.querySelector(`.explore-card-inner[data-section="${sectionKey}"]`);
+    if (target) {
+      updateTertiaryPanel(sectionKey);
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   });
 });
 
-// 2. Highlight orb based on scroll position
-const observer = new IntersectionObserver((entries) => {
+// ✅ Highlight orb + update panel on scroll
+const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const index = Array.from(sections).indexOf(entry.target);
-      if (index !== -1) {
-        orbButtons.forEach(o => o.classList.remove('active'));
-        orbButtons[index].classList.add('active');
-      }
+      const sectionKey = entry.target.dataset.section;
+      updateTertiaryPanel(sectionKey);
+      const key = entry.target.dataset.section;
+      updateFloatingPreview(key);
+      
+      orbButtons.forEach(o => {
+        o.classList.toggle('active', o.dataset.section === sectionKey);
+      });
     }
   });
 }, {
-  threshold: 0.6 // Section is "active" when 60% visible
+  threshold: 0.6
 });
 
 sections.forEach(section => observer.observe(section));
+
+function updateFloatingPreview(key) {
+  const data = projectData[key];
+  if (!data || !data.blog) return;
+
+  const preview = document.getElementById('floating-preview');
+  const thumb = preview.querySelector('.preview-thumb');
+  const title = preview.querySelector('.preview-title');
+  const link = preview.querySelector('.preview-blog-link');
+
+  thumb.src = data.image;
+  thumb.alt = `${data.title} preview`;
+  title.textContent = data.title;
+  link.href = data.blog;
+
+  preview.classList.add('visible');
+}
+
+document.querySelectorAll('.explore-card-inner').forEach(card => {
+  const projectKey = card.dataset.section;
+  const data = projectData[projectKey];
+
+  if (data && data.title) {
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('floating-title');
+    titleDiv.textContent = data.title;
+
+    // Only insert on mobile-sized screens
+    if (window.innerWidth <= 768) {
+      card.parentNode.insertBefore(titleDiv, card);
+    }
+  }
+});
+
 // #endregion explorenav
