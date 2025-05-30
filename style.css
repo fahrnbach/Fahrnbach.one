@@ -1184,6 +1184,11 @@ svg{ overflow : visible ; }
 
 @media (max-width: 768px) {
 
+  .explore-card-inner {
+    width: 72vw;
+    aspect-ratio: 1/1;
+  }
+
   .explore-projects {
     /* scroll-snap-type: none; */
   }
