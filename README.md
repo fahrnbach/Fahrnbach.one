@@ -1,4 +1,7 @@
-# www.fahrnbach.one — Developer Portfolio & Personal Website
+# Developer Portfolio & Personal Website
+
+**Live Site:** [fahrnbach.one](https://art.fahrnbach.one)  
+**Repo:** [github.com/fahrnbach/portfolio-site](https://github.com/fahrnbach/portfolio-site)  
 
 A minimalist, handcrafted personal website to showcase my journey, projects, and design sensibilities. 
 Built entirely with vanilla JavaScript, HTML, and CSS. Built without frameworks (except for threejs), or dependencies;
@@ -81,3 +84,24 @@ I designed and developed the entire site — from layout, responsiveness, and cu
 ├── /js
 │   └── main.js
 ├── README.md
+
+```
+# Portfolio Links:
+
+>[🌐 Live Demo (Portfolio Site)](https://fahrnbach.one)
+>
+>[🗃️ Angular Component Library](https://library.fahrnbach.one)
+>
+>[🎨 Art App](https://art.fahrnbach.one)
+>
+>[📖 Blog App w/ Python CMS](https://blog.fahrnbach.one)
+
+## 📬 Let’s Connect
+
+- 🌐 Portfolio: [fahrnbach.one](https://fahrnbach.one)
+- 💼 LinkedIn: *https://www.linkedin.com/in/fahrnbach*
+- 📧 Email: *jacob@fahrnbach.one*
+
+---
+
+> *“Code is craft. Design is empathy. My goal is to bridge the two.”*
