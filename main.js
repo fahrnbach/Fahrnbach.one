@@ -917,7 +917,7 @@ const projectData = {
     art: {
       title: 'Art App',
       description: 'A visually rich app with custom Illustrator UI and AI-enhanced art.',
-      image: './public/assets/screenshots/art-screenshot.png',
+      image: './public/screenshots/art-screenshot.png',
       link: 'https://art.fahrnbach.one',
       code: 'https://github.com/fahrnbach/art-app',
       blog: 'https://blog.fahrnbach.one'
@@ -925,7 +925,7 @@ const projectData = {
     blog: {
       title: 'Blog (Python CMS)',
       description: 'A Markdown-based blog with a custom Python CMS backend.',
-      image: './public/assets/screenshots/blog-screenshot.png',
+      image: './public/screenshots/blog-screenshot.png',
       link: 'https://blog.fahrnbach.one',
       code: 'https://github.com/fahrnbach/blog-monorepo',
       blog: 'https://blog.fahrnbach.one'
@@ -933,7 +933,7 @@ const projectData = {
     library: {
       title: 'Component Library',
       description: 'Reusable Angular components built with a custom Node.js backend.',
-      image: './public/assets/screenshots/library-screenshot.png',
+      image: './public/screenshots/library-screenshot.png',
       link: 'https://library.fahrnbach.one', // optional custom frontend link
       code: 'https://github.com/fahrnbach/angular-library',
       blog: 'https://blog.fahrnbach.one'
@@ -941,7 +941,7 @@ const projectData = {
     ongoing: {
       title: 'Ongoing Projects',
       description: 'A responsive site (github 🤣) showcasing my design, dev, and UI skills.',
-      image: './public/assets/screenshots/ongoing-screenshot.png',
+      image: './public/screenshots/ongoing-screenshot.png',
       link: 'https://github.com/fahrnbach',
       code: 'https://github.com/fahrnbach',
       blog: 'https://blog.fahrnbach.one'
@@ -949,7 +949,7 @@ const projectData = {
     portfolio: {
       title: 'My Portfolio [You are Here 📍]',
       description: 'A Single Page Application entirely made in Vanilla Javascript',
-      image: './public/assets/screenshots/portfolio-screenshot.png',
+      image: './public/screenshots/portfolio-screenshot.png',
       link: 'https://fahrnbach.one',
       code: 'https://github.com/fahrnbach',
       blog: 'https://blog.fahrnbach.one'
