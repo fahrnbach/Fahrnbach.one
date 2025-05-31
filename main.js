@@ -728,10 +728,10 @@ for (let i=0; i < 100; i++) {
 // #endregion Animation Magic
 
 // #region Nav
-let reloadButton = document.querySelector('.reload')
-reloadButton.addEventListener('pointerup', () => {
-  window.location.reload()
-})
+// let reloadButton = document.querySelector('.reload')
+// reloadButton.addEventListener('pointerup', () => {
+//   window.location.reload()
+// })
 
 //#endregion Nav
 
