@@ -1066,9 +1066,9 @@ svg{ overflow : visible ; }
 }
 
 .about-me { 
-  position: absolute;
+  position: fixed;
   /* top: 90vh; */
-  height: 250vh;
+  height: 100vh;
   overflow-x: scroll;
   width: 100vw;
 }
