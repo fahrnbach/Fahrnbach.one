@@ -920,7 +920,7 @@ const projectData = {
       image: '/screenshots/art-screenshot.png',
       link: 'https://art.fahrnbach.one',
       code: 'https://github.com/fahrnbach/art-app',
-      blog: 'https://blog.fahrnbach.one'
+      blog: 'https://blog.fahrnbach.one/art-app'
     },
     blog: {
       title: 'Blog (Python CMS)',
@@ -928,7 +928,7 @@ const projectData = {
       image: '/screenshots/blog-screenshot.png',
       link: 'https://blog.fahrnbach.one',
       code: 'https://github.com/fahrnbach/blog-monorepo',
-      blog: 'https://blog.fahrnbach.one'
+      blog: 'https://blog.fahrnbach.one/blog-monorepo'
     },
     library: {
       title: 'Component Library',
@@ -936,7 +936,7 @@ const projectData = {
       image: '/screenshots/library-screenshot.png',
       link: 'https://library.fahrnbach.one', // optional custom frontend link
       code: 'https://github.com/fahrnbach/angular-library',
-      blog: 'https://blog.fahrnbach.one'
+      blog: 'https://blog.fahrnbach.one/angular-library'
     },
     ongoing: {
       title: 'Ongoing Projects',
@@ -944,15 +944,15 @@ const projectData = {
       image: '/screenshots/ongoing-screenshot.png',
       link: 'https://github.com/fahrnbach',
       code: 'https://github.com/fahrnbach',
-      blog: 'https://blog.fahrnbach.one'
+      blog: 'https://blog.fahrnbach.one/sign-git-commits'
     },
     portfolio: {
       title: 'My Portfolio [You are Here 📍]',
       description: 'A Single Page Application entirely made in Vanilla Javascript',
       image: '/screenshots/portfolio-screenshot.png',
       link: 'https://fahrnbach.one',
-      code: 'https://github.com/fahrnbach',
-      blog: 'https://blog.fahrnbach.one'
+      code: 'https://github.com/portfolio-site',
+      blog: 'https://blog.fahrnbach.one/portfolio-site'
     }
 };
 
@@ -1007,6 +1007,7 @@ function updateTertiaryPanel(key) {
   document.getElementById('project-description').textContent = data.description;
   document.getElementById('project-link').href = data.link;
   document.getElementById('project-code').href = data.code;
+  document.getElementById('project-blog').href = data.blog;
 
   panel.classList.add('visible');
 }
